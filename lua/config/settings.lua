@@ -11,7 +11,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 vim.opt.autoindent= true
-vim.opt.smartindent = false 
+vim.opt.smartindent = false
 vim.opt.cindent = false
 
 vim.opt.wrap = false
@@ -26,7 +26,7 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 

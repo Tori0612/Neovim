@@ -4,8 +4,12 @@ return {
     ft = 'tex', -- Load only for .tex files
     config = function()
       vim.g.vimtex_view_method = 'general' -- Use external viewer
-      vim.g.vimtex_view_general_viewer = 'SumatraPDF' -- Or full path: 'C:\\Program Files\\SumatraPDF\\SumatraPDF.exe'
-      vim.g.vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf' -- Forward search
+      vim.g.vimtex_view_general_viewer = '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe' -- Or full path: 'C:\\Program Files\\SumatraPDF\\SumatraPDF.exe'
+      vim.g.vimtex_view_general_options = [[
+        -NoProfile -Command "& {
+          Start-Process 'C:\Users\crist\AppData\Local\SumatraPDF\SumatraPDF.exe' -ArgumentList '-reuse-instance', '-forward-search', '@tex', '@line', '@pdf'
+        }"
+      ]] -- Forward search
       vim.g.vimtex_view_general_options_latexmk = '-reuse-instance' -- Reuse instance for continuous compilation
       vim.g.vimtex_compiler_method = 'latexmk'
       vim.g.vimtex_quickfix_mode = 0 -- Disable quickfix window

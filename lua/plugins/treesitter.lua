@@ -23,8 +23,11 @@ return {
 			ensure_installed = {
                 "python", "javascript", 'css', 'typescript', 'html', "lua",
                 "vim", "vimdoc", "query", "markdown", "markdown_inline", "latex",
-                "vbscript",
+                "vbscript", "elixir", "heex", "eex", "scala"
             },
+
+            modules = {},
+            ignore_install = {},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
 			sync_install = false,
@@ -53,7 +56,7 @@ return {
         local ok_autotag, autotag = pcall(require, 'nvim-ts-autotag')
         if ok_autotag then
             autotag.setup()
-        else 
+        else
             vim.notify("nvim-ts-autotag not found", vim.log.levels.WARN)
         end
 	end,

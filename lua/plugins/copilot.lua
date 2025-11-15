@@ -49,14 +49,4 @@ return {
             end, { desc = "Toggle Copilot" }) 
         end,
     },
-
-    -- plugin to integrate copilot with nvim-cmp
-    {
-        "zbirenbaum/copilot-cmp",
-        dependencies = { "zbirenbaum/copilot.lua" },
-        event = "InsertEnter",
-        config = function ()
-            require("copilot_cmp").setup()
-        end,
-    },
 }

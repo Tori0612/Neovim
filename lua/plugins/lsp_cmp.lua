@@ -11,7 +11,7 @@ return {
         'williamboman/mason-lspconfig.nvim',
         dependencies = { 'williamboman/mason.nvim', 'neovim/nvim-lspconfig' },
         opts = {
-            ensure_installed = { 'pyright', 'texlab', 'lua_ls', 'ts_ls', 'tailwindcss', 'html', 'cssls' },
+            ensure_installed = { 'pyright', 'texlab', 'lua_ls', 'ts_ls', 'tailwindcss', 'html', 'cssls', 'elixirls', },
             automatic_enable = true,
         },
         config = function(_, opts)
@@ -98,9 +98,16 @@ return {
                     root_dir = util.root_pattern(".git", "vba.json"),
                     settings = {}
                 },
+                elixirls = {
+                    settings = {
+                        elixirLS = {
+                            dialyzerEnabled = false,
+                            fetchDeps = false
+                        }
+                    }
+                },
             }
 
-            -- ✅ The only line that *needed* change
             for server_name, config in pairs(servers) do
                 config.capabilities = capabilities
                 vim.lsp.config(server_name, config)
@@ -150,7 +157,6 @@ return {
                 sorting = {
                     priority_weight = 2,
                     comparators = {
-                        require("copilot_cmp.comparators").prioritize,
                         cmp.config.compare.offset,
                         cmp.config.compare.exact,
                         cmp.config.compare.score,
