@@ -1,16 +1,13 @@
 return {
-    -- 🌟 Emmet: expand .class → <div class="class"></div>
     {
         "mattn/emmet-vim",
-        ft = { "html", "css", "javascriptreact", "typescriptreact" },
+        ft = { "html", "css", "javascriptreact", "typescriptreact", "markdown", "htmldjango" },
         init = function()
             vim.g.user_emmet_mode = 'a'          -- enable all modes
             vim.g.user_emmet_leader_key = ','    -- use ',' as trigger prefix
         end,
     },
 
-
-    -- 🌟 Autotag: auto-close and rename tags in JSX/HTML
     {
         "windwp/nvim-ts-autotag",
         event = "InsertEnter",

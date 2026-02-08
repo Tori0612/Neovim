@@ -46,7 +46,7 @@ return {
                     cmd.disable()
                     print("Copilot Disabled")
                 end
-            end, { desc = "Toggle Copilot" }) 
+            end, { desc = "Toggle Copilot" })
         end,
     },
 }

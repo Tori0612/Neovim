@@ -1,0 +1,3 @@
+const something = () => {
+  idk: 'something'
+}

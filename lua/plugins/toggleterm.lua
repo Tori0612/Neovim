@@ -46,7 +46,6 @@ return {
 
             -- Optional: map Ctrl+\\ globally too
             vim.keymap.set({ "n", "t" }, "<C-\\>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
-            vim.keymap.set({ "n", "t" }, "<leader>tt", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
         end,
     },
 }

@@ -1,19 +1,25 @@
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
 
 # -------------------------
 # Powerlevel10k
 # -------------------------
-source ~/.powerlevel10k/powerlevel10k.zsh-theme
+#source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # Run Powerlevel10k config wizard on first launch
-[[ ! -f ~/.p10k.zsh ]] && p10k configure
+#[[ ! -f ~/.p10k.zsh ]] && p10k configure
 
 
+source ~/.zsh/spaceship/spaceship.zsh
+fpath=(~/.zsh/zsh-completions/src $fpath)
+autoload -Uz compinit && compinit
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # -------------------------
 # Basic Options
 # -------------------------
@@ -33,18 +39,9 @@ HISTFILE=~/.zsh_history
 # -------------------------
 # Paths
 # -------------------------
-export PATH="$HOME/.pyenv/bin:$PATH"
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
 export PATH="$PATH:$HOME/.local/share/coursier/bin"
-
-
-# -------------------------
-# Pyenv
-# -------------------------
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 
 # -------------------------
 # NVM
@@ -53,30 +50,19 @@ export NVM_DIR="$HOME/.nvm"
 [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"
 
 
-# -------------------------
-# FZF
-# -------------------------
-if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
-    source /usr/share/doc/fzf/examples/key-bindings.zsh
-fi
-if [[ -f /usr/share/doc/fzf/examples/completion.zsh ]]; then
-    source /usr/share/doc/fzf/examples/completion.zsh
-fi
-
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview 'bat --style=numbers --color=always {} | head -500'"
 
 
 # -------------------------
 # Yazi integration
 # -------------------------
 function y() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-  yazi "$@" --cwd-file="$tmp"
-  IFS= read -r -d '' cwd < "$tmp"
-  [[ -n "$cwd" ]] && [[ "$cwd" != "$PWD" ]] && cd "$cwd"
-  rm -f "$tmp"
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
 }
-
 
 # -------------------------
 # Fuzzy cd
@@ -117,7 +103,6 @@ alias ldc='lazydocker'
 alias nv='nvim .'
 alias nvimc='nvim ~/.config/nvim'
 alias zshrc='nvim ~/.zshrc && source ~/.zshrc'
-alias weztermc='nvim /mnt/c/Users/crist/.wezterm.lua'
 
 # MOTIONS
 alias ..='cd ..'
@@ -125,8 +110,63 @@ alias ...='cd ../..'
 alias home='cd ~'
 alias proj='cd ~/projects'
 alias sf='cd ~/projects/StockFlow'
-alias vbap='cd /mnt/c/Users/crist/OneDrive/Documentos/Gian/Estudos/VBA'
-alias atext='nvim /mnt/c/Users/crist/OneDrive/Documentos/Gian/Estudos/AcademicTexts'
+alias hypr='nvim ~/.config/hypr/hyprland.conf'
+alias hexit='hyprctl dispatch exit' 
+alias waybarc='nvim ~/.config/waybar/config.jsonc'
+alias atext='cd ~/Estudos/AcademicTexts'
+alias ttt="Themer-TUI"
+alias countlines= "xargs -I {} cat {} | wc -l"
+#To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# VENV Python
+
+alias vpip='~/.local/share/nvim/neovim-venv/bin/pip'
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Inicializa o Starship
+#eval "$(starship init zsh)"
+#
+
+# -------------------------
+# Pyenv
+# -------------------------
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# -------------------------
+# Ziglang
+# -------------------------
+export PATH="$HOME/.zig/zig-x86_64-linux-0.16.0-dev.2193+fc517bd01:$PATH"
+#export PATH="$HOME/.zig/zig-x86_64-linux-0.15.2:$PATH"
+#
+#
+# -------------------------
+# Themer
+# -------------------------
+#
+# Add to ~/.bashrc or ~/.zshrc
+if [ -d "$HOME/projects/Themer/zig-out/bin" ]; then
+    export PATH="$HOME/projects/Themer/zig-out/bin:$PATH"
+fi
+
+# -------------------------
+# Golang
+# -------------------------
+export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:$HOME/go/bin"
+
+# bun completions
+[ -s "/home/tori/.bun/_bun" ] && source "/home/tori/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+alias tmc='/home/tori/.local/bin/tmc'
+export TMC_LANGS_CONFIG_DIR='/home/tori/tmc-config'
+fpath=(/home/tori/.local/share/tmc-autocomplete/_tmc  $fpath)
+compdef _tmc tmc
+
