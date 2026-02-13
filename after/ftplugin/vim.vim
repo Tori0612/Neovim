@@ -1,7 +1,9 @@
-" after/ftplugin/vim.vim
+" after/ftplugin/vim.vim  
 setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal softtabstop=4
 setlocal expandtab
 
 setlocal commentstring=\"\ %s
+
+iabbrev <buffer> crfile <C-r>=expand("%")<CR>

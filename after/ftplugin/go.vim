@@ -13,4 +13,6 @@ iabbrev <buffer> ierr if err != nil {<CR>return err<Esc>
 
 nnoremap <buffer> <leader>ii :GoImpl<CR>
 
+setlocal makeprg=go\ run\ %
+
 setlocal commentstring=//\ %s
