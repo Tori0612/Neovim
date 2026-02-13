@@ -1,2 +1,2 @@
-queries/** linguist-vendored
-parser/** linguist-vendored
+queries/** linguist-generated
+parser/**  linguist-generated
