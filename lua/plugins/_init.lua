@@ -1,0 +1,10 @@
+-- @p lua/plugins/_init.lua
+-- require('plugins.jdtls')
+require('plugins.snippets')
+require('plugins.mini_pick')
+require('plugins.mini_pairs')
+require('plugins.oil')
+require('plugins.mason')
+require('plugins.cmp')
+-- require('plugins.emmet')
+require("plugins.undotree")

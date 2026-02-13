@@ -1,17 +1,15 @@
-return {
-  {
-    'jiaoshijie/undotree',
-    dependencies = { 'nvim-lua/plenary.nvim' },  -- Required for async operations
-    keys = {
-      { '<leader>u', "<cmd>lua require('undotree').toggle()<cr>", desc = 'Toggle Undotree' },
-    },
-    config = function()
-      require('undotree').setup({
-        position = 'left',         -- Window position (left/right)
-        -- Optional: More settings
-        -- diff = { inline = true }, -- Inline diff preview
-        -- keymaps = { ... },       -- Customize if needed
-      })
-    end,
-  },
-}
+-- @p lua/plugins/undotree.lua
+local gh = require("helpers.github").gh
+
+vim.pack.add({ { src = gh('mbbill/undotree') } })
+
+local function toggle_and_focus()
+  vim.cmd.UndotreeToggle()
+
+  local winid = vim.fn.bufwinid("undotree")
+  if  winid ~= 1 then
+    vim.api.nvim_set_current_win(winid)
+  end
+end
+
+vim.keymap.set("n", "<leader>u", toggle_and_focus, { desc = "Toggle and Focus UndoTree"} )
