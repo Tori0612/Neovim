@@ -4,6 +4,8 @@
 -- for changing my whole environment at once, like: waybar, rofi, hyprland borders, swww, neovim and kitty.
 -- If your config is not on the default location @p ~/.config/nvim/ it prolly wont work and i dont recommend
 -- trying.
+local is_windows = vim.fn.has("win32") == 1
+
 local state = {
   buf = -1,
   win = -1,
@@ -13,14 +15,24 @@ local function reload_colorscheme()
   local theme = vim.g.colors_name
   if not theme then return end
 
-  local path = vim.fn.stdpath('config') .. '/lua/colors/colorscheme.lua'
+  local path = ""
+  if not is_windows then
+    path = vim.fn.stdpath('config') .. '/lua/colors/colorscheme.lua'
+  else
+    path = vim.fn.stdpath('config') .. '\\lua\\colors\\colorscheme.lua'
+  end
   if vim.fn.filereadable(path) == 1 then
     dofile(path)
   end
 end
 
 local function reload_highlights()
-  local path = vim.fn.stdpath('config') .. '/lua/custom/highlights.lua'
+  local path = ""
+  if not is_windows then
+    path = vim.fn.stdpath('config') .. '/lua/custom/highlights.lua'
+  else
+    path = vim.fn.stdpath('config') .. '\\lua\\custom\\highlights.lua'
+  end
   if vim.fn.filereadable(path) == 1 then
     dofile(path)
   end
@@ -62,7 +74,12 @@ local function open_theme_switcher()
     "NormalFloat:FloatDarkBg,FloatBorder:FloatDarkBorder",
     { win = state.win })
 
-  local theme_switcher_path = vim.fn.stdpath('config') .. '/bin/nvim-themes'
+  local theme_switcher_path = ""
+  if not is_windows then
+    theme_switcher_path = vim.fn.stdpath('config') .. '/bin/nvim-themes'
+  else
+    theme_switcher_path = vim.fn.stdpath('config') .. '\\bin\\nvim-themes'
+  end
 
   vim.fn.jobstart(theme_switcher_path, {
     term = true,

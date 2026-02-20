@@ -37,8 +37,14 @@ vim.opt.scrolloff = 10
 -- { Weird Settings {{{
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = vim.fn.stdpath("state") .. "/undo"
+vim.opt.writebackup = false
+vim.opt.backupcopy = "yes"
 vim.opt.undofile = true
+local undodir = vim.fn.stdpath("state") .. "/undo"
+if vim.fn.isdirectory(undodir) == 0 then
+  vim.fn.mdkir(undodir, "p")
+end
+vim.opt.undodir = undodir
 -- }}}
 
 -- { Folding and Some More Weird settings {{{

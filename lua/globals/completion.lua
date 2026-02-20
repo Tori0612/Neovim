@@ -257,7 +257,7 @@ vim.keymap.set("i", "<CR>", function()
 end, { expr = true })
 
 vim.keymap.set("i", "ç", accept_suggestion, { expr = true, noremap = true })
--- }}]
+-- }}}
 
 -- { Completion Options {{{
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy" }

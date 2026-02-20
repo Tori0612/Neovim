@@ -46,5 +46,13 @@ return {
       i(2, "list"),
       rep(1)
     })
-  )
+  ),
+  s({ trig = "print", snippetType = "autosnippet" },
+    fmta(
+      [[
+      System.out.print(<>)
+      ]],
+      { i(0) }
+    )
+  ),
 }

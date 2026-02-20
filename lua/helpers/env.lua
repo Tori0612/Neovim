@@ -4,10 +4,16 @@
 -- installed with mason, check on @p lua/helpers/lsp.lua to see how to set and get your lsps in .env
 
 local M = {}
+local is_windows = vim.fn.has("win32") == 1
 
 function M.load()
   -- Gets the .env on the standard nvim config folder(~/.config/nvim/)
-  local env_file = vim.fn.stdpath("config") .. "/.env"
+  local env_file = ""
+  if not is_windows then
+    env_file = vim.fn.stdpath("config") .. "/.env"
+  else
+    env_file = vim.fn.stdpath("config") .. "\\.env"
+  end
 
   -- if there's no .env then it returns, other implementations have a nice fallback (i believe so)
   if vim.fn.filereadable(env_file) == 0 then

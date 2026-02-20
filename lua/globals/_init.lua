@@ -5,5 +5,6 @@
 -- all have description, so its pretty easy to get, check inside @p lua/globals/completion.lua to see more about it.
 
 require('globals.options')
+require('globals.autocmds')
 -- require('globals.completion')
 require('globals.keymaps')

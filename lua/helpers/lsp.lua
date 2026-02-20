@@ -14,6 +14,7 @@
 -- @p lua/servers/clangd.lua
 
 local M = {}
+local is_windows = vim.fn.has("win32") == 1
 
 function M.get_cmd(server_name, default_binary)
     local env_path = os.getenv(server_name:upper() .. "_LSP_PATH")
@@ -21,10 +22,15 @@ function M.get_cmd(server_name, default_binary)
       return env_path
     end
 
-    local mason_path = vim.fn.stdpath("data") .. "/mason/bin/" .. default_binary
+    local mason_path = ""
+    if not is_windows then
+      mason_path = vim.fn.stdpath("data") .. "/mason/bin/" .. default_binary
+    else
+      mason_path = vim.fn.stdpath("data") .. "\\mason\\bin\\" .. default_binary
+    end
     if vim.fn.executable(mason_path) == 1 then
         return mason_path
-    end
+     end
 
     return default_binary
 end

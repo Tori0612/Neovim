@@ -10,16 +10,7 @@ map("n", "<leader>pl", vim.cmd.Ex, { desc = "Open File Explorer (netrw)" })
 map("i", "jj", "<Esc>", { noremap = true, silent = true, desc = "Escape Insert Mode" })
 map("n", "<leader>so", ":update<CR> :source<CR>", { desc = "Save and Source File" })
 map("n", "<leader>lf", vim.lsp.buf.format, { desc = "Trigger Language Format" })
--- }}}
-
--- { Netrw {{{
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "netrw",
-  callback = function()
-    map("n", "l", "<CR>", { buffer = true, remap = true, desc = "Go One Directory Below (netrw)" })
-    map("n", "h", "-", { buffer = true, remap = true, desc = "Go One Directory Above (netrw)" })
-  end,
-})
+map("n", "<leader>==", "ggVG=", { desc = "Indent whole file 'correctly'"})
 -- }}}
 
 -- { Emmet {{{

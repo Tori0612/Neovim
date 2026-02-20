@@ -12,22 +12,20 @@ M.get_capabilities = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
   -- { Local Capabilities {{{
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = { "documentation", "detail", "additionalTextEdits" },
-  }
+--  capabilities.textDocument.completion.completionItem.snippetSupport = true
+--  capabilities.textDocument.completion.completionItem.resolveSupport = {
+--    properties = { "documentation", "detail", "additionalTextEdits" },
+--  }
   -- }}}
 
   -- { Blink Capabilities {{{
---   local has_blink, blink = pcall(require, "blink.cmp")
---   if has_blink then
---     return blink.get_lsp_capabilities(capabilities)
---   end
+   local has_blink, blink = pcall(require, "blink.cmp")
+   if has_blink then
+     return blink.get_lsp_capabilities(capabilities)
+   end
   -- }}}
 
   return capabilities
 end
 
 return M
-
-
