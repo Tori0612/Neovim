@@ -1,5 +1,5 @@
 $NvimConfig = "$HOME\AppData\Local\nvim"
-$ScriptDir = $PSScriptRoot
+$ScriptDir = Split-Path -Parent $PSScriptRoot
 
 Write-Host "Installing Neovim configuration..." -ForegroundColor Cyan
 
