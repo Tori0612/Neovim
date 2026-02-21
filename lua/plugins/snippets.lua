@@ -2,7 +2,7 @@
 local gh = require('helpers.github').gh
 vim.pack.add({ { src = gh("L3MON4D3/LuaSnip") } })
 
-local config = vim.fn.stdpath("config") .. "/.env"
+local config = vim.fn.stdpath("config")
 local is_windows = vim.fn.has("win32") == 1
 local path = ""
 if not is_windows then

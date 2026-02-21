@@ -47,7 +47,7 @@ return {
       rep(1)
     })
   ),
-  s({ trig = "print", snippetType = "autosnippet" },
+  s({ trig = "print", snippetType = "snippet" },
     fmta(
       [[
       System.out.print(<>)
