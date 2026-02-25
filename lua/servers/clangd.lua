@@ -64,10 +64,10 @@ end
 local cmd = require("helpers.lsp")
 local capabilities = require("helpers.capabilities").get_capabilities()
 
--- │ @GOPLS_CONFIG │
+-- │ @CLANGD_CONFIG │
 ---@type vim.lsp.Config
 return {
-  cmd = { cmd.get_cmd("gopls", 'clangd') },
+  cmd = { cmd.get_cmd("clangd", 'clangd') },
   capabilities = capabilities,
   filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
   root_markers = {

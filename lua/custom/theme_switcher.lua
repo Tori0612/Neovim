@@ -7,8 +7,7 @@
 local is_windows = vim.fn.has("win32") == 1
 
 local state = {
-  buf = -1,
-  win = -1,
+  buf = -1, win = -1,
 }
 
 local function reload_colorscheme()
@@ -62,10 +61,8 @@ local function open_theme_switcher()
 
   state.win = vim.api.nvim_open_win(state.buf, true, {
     relative = "editor",
-    width = width,
-    height = height,
-    row = row,
-    col = col,
+    width = width, height = height,
+    row = row, col = col,
     style = "minimal",
     border = "rounded",
   })
@@ -97,7 +94,7 @@ local function open_theme_switcher()
 end
 
 vim.keymap.set('n', '<leader>ts', open_theme_switcher, { desc = "Theme Switcher" })
-vim.keymap.set({ "n", "t" }, "q", function()
+vim.keymap.set({ "t" }, "q", function()
   if vim.api.nvim_win_is_valid(state.win) then
     vim.api.nvim_win_close(state.win, true)
   end

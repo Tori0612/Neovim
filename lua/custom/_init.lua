@@ -9,6 +9,7 @@ require('custom.surround')        -- inspiration: @l https://github.com/tpope/vi
 require('custom.jumper')          -- inspiration: @l https://github.com/ThePrimeagen/harpoon
 require('custom.statusline')      -- inspiration: @l https://github.com/nvim-lualine/lualine.nvim
 require('custom.terminal')        -- inspiration: @l https://github.com/akinsho/toggleterm.nvim
+require('custom.arvex')
 require('custom.theme_switcher')
 require('custom.highlights')
 require('custom.toc')

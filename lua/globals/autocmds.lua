@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
   group = ts_group,
-  pattern = { "java", "go" },
+  pattern = { "java", "go", "lua", "c", "zig" },
   callback = function (args)
     local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
     if lang then
