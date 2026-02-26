@@ -1,4 +1,4 @@
-" after/ftplugin/go.vim
+" @p after/ftplugin/go.vim
 setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal noexpandtab  " Go uses tabs

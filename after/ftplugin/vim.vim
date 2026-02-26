@@ -1,4 +1,4 @@
-" after/ftplugin/vim.vim  
+" @p after/ftplugin/vim.vim
 setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal softtabstop=4

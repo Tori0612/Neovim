@@ -1,10 +1,8 @@
-" after/ftplugin/lua.vim
-if exists("b:did_ftplugin") | finish | endif
-let b:did_ftplugin = 1
-
+" @p after/ftplugin/lua.vim
 setlocal shiftwidth=2
 setlocal tabstop=2
 setlocal expandtab
+setlocal foldmethod=marker
 
 setlocal commentstring=--\ %s
 

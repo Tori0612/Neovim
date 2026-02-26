@@ -34,5 +34,3 @@ vim.keymap.set({ "i", "s" }, "<S-Tab>", function ()
   return "<S-Tab>"
 end, { expr = true, silent = true })
 -- }}}
-
--- vim: foldmethod=marker

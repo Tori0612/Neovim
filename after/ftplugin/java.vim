@@ -1,3 +1,4 @@
+" @p after/ftplugin/java.vim
 setlocal shiftwidth=4
 setlocal tabstop=4
 setlocal expandtab

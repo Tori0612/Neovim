@@ -27,7 +27,7 @@ local function apply_highlights()
   hl(0, "TocTitleHeader", { fg = colors.green, bold = true })
 
   -- @t [ LSP Config ]
-  hl(0, "LSPMark", { bg = colors.bright_magenta, bold = true, italic = true, fg = "#e6cad2" })
+  hl(0, "LSPMark", { fg = colors.fg0, bg = colors.bright_blue, bold = true, italic = true })
 
   -- @t [ File Paths ]
   hl(0, "FilePath", { fg = colors.cyan, italic = true })

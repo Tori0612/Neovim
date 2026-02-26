@@ -1,4 +1,4 @@
-" after/ftplugin/toc.vim
+" @p after/ftplugin/toc.vim
 " setlocal buftype=nofile
 " setlocal bufhidden=wipe
 " setlocal noswapfile

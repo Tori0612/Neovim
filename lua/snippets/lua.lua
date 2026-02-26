@@ -6,11 +6,6 @@ local t = ls.text_node
 local fmta = require("luasnip.extras.fmt").fmta
 
 return {
-  s("modeline", {
-    t("-- "),
-    t("vim:"),
-    t(" foldmethod=marker")
-  }),
   s({ trig = "TITLE", sippetType = "autosnippet"},
     fmta(
       [[

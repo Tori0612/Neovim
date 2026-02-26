@@ -263,5 +263,3 @@ vim.keymap.set("i", "ç", accept_suggestion, { expr = true, noremap = true })
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy" }
 vim.opt.pumheight = 10
 -- }}}
-
--- vim: foldmethod=marker

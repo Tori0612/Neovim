@@ -137,5 +137,3 @@ vim.keymap.set("n", "<C-3>", function () M.goto_mark(3) end, opts)
 -- }}}
 
 return M
-
--- vim: foldmethod=marker

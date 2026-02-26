@@ -48,7 +48,6 @@ vim.opt.undodir = undodir
 -- }}}
 
 -- { Folding and Some More Weird settings {{{
-vim.opt.foldmethod= 'expr' -- these folding seem to not work that well, but there's the keymap <leader>z, it has been solving it
 vim.opt.foldenable = false
 vim.opt.foldlevel = 99
 vim.opt.hlsearch = false
@@ -78,5 +77,3 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 -- }}}
-
--- vim: foldmethod=marker

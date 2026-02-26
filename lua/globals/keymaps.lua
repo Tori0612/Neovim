@@ -80,9 +80,13 @@ map("o", "ai", "a[", { noremap = true, desc = "Shorter Change Around Brackets" }
 map("o", "ao", "a{", { noremap = true, desc = "Shorter Change Around Braces" })
 -- }}}
 
--- { File Copy {{{
-map("n", '<leader>cr', '<cmd>let @+ = expand("%")<CR>', { desc = 'Copy the relative path to the "current" file' })
-map("n", '<leader>cp', '<cmd>let @+ = expand("%:p")<CR>', { desc = 'Copy the absolute path to the "current" file' })
+-- { File Stuff {{{
+map("n", '<leader>cr', '<cmd>let @+ = fnamemodify(expand("%"), ":.")<CR>',
+  { desc = 'Copy the relative path to the "current" file' })
+map("n", '<leader>cp', '<cmd>let @+ = expand("%:p")<CR>',
+  { desc = 'Copy the absolute path to the "current" file' })
+map("n", '<leader>pf', 'i@p<Space><Esc><Space>cp"+p_/nvim<CR>f/vF@f/dgcc:w<CR>',
+  { remap = true, desc = "Add File Path Headers to Config Files" })
+map("n", '<leader>pp', 'i@p<Space><Esc><Space>cr"+pgcc:w<CR>',
+  { remap = true, desc = "Add File Path Headers" })
 -- }}}
-
--- vim: foldmethod=marker

@@ -100,5 +100,3 @@ end
 
 vim.o.laststatus = 3
 vim.opt.statusline = '%!v:lua.statusline()'
-
--- vim: foldmethod=marker

@@ -41,9 +41,15 @@ local function create_tinymist_command(command_name, client, bufnr)
   return run_tinymist_command, cmd_name, cmd_desc
 end
 
+
+local cmd = require("helpers.lsp")
+local capabilities = require("helpers.capabilities").get_capabilities()
+
+-- │ @TINYMIST_CONFIG │
 ---@type vim.lsp.Config
 return {
-  cmd = { 'tinymist' },
+  cmd = { cmd.get_cmd('tinymist', 'tinymist') },
+  capabilities = capabilities,
   filetypes = { 'typst' },
   root_markers = { '.git' },
   on_attach = function(client, bufnr)
