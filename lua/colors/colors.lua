@@ -33,6 +33,13 @@ return {
   bright_purple = "#cba6f7",
   bright_magenta = "#f5c2e7",
 
+  -- Semantic UI colors
+  normal  = "#89b4fa",  -- blue (strong identity)
+  insert  = "#a6e3a1",  -- green (clear and readable)
+  visual  = "#cba6f7",  -- purple (distinct from blue)
+  replace = "#f38ba8",  -- red-pink (better than pure red here)
+  command = "#fab387",  -- peach (more visible than yellow)
+
   -- Special
   comment = "#6c7086",
   selection = "#585b70",

@@ -59,4 +59,5 @@ require("catppuccin").setup({
     which_key = true,
   },
 })
+
 vim.cmd.colorscheme("catppuccin")

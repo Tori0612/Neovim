@@ -68,6 +68,8 @@ map("v", "<leader>s", "\"hy:%s#<C-r>h#<C-r>h#gI<Left><Left><Left>",
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Turn File Into an Executable" })
 map("n", "<leader>r", ":s/\\s\\+/\\r/g", { desc = "Spread Line Into Next Lines (per contiguous text)" })
 map("n", "<leader>z", "_izx<Esc>u", { desc = "Force Fold Enable" })
+map("v", '<leader>bf', 'c{{{<CR><Esc>0p<Up>dd<Up>0%gcc$%gcc0<Right><Right>i<Space>{<Right><C-h><Space>',
+  { remap = true, desc = "Make a Block foldable and insert a title" })
 -- }}}
 -- {    } --
 

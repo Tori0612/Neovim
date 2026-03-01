@@ -36,17 +36,18 @@ local function apply_highlights()
   hl(0, "LinkUrl", { fg = colors.blue, italic = true })
 
   -- { StatusLine Colors {{{
-  hl(0, "StatusNormal", { fg = colors.bg1, bg = colors.fg0, bold = true })
-  hl(0, "StatusInsert", { fg = colors.bg1, bg = colors.blue, bold = true })
-  hl(0, "StatusVisual", { fg = colors.bg1, bg = colors.magenta, bold = true })
-  hl(0, "StatusCmd",    { fg = colors.bg1, bg = colors.orange, bold = true })
-  hl(0, "StatusReplace",{ fg = colors.bg1, bg = colors.red, bold = true })
+  hl(0, "StatusNormal", { fg = colors.bg1, bg = colors.normal, bold = true })
+  hl(0, "StatusInsert", { fg = colors.bg1, bg = colors.insert, bold = true })
+  hl(0, "StatusVisual", { fg = colors.bg1, bg = colors.visual, bold = true })
+  hl(0, "StatusCmd",    { fg = colors.bg1, bg = colors.command, bold = true })
+  hl(0, "StatusReplace",{ fg = colors.bg1, bg = colors.replace, bold = true })
   hl(0, "StatusEmpty",  { fg = colors.fg0, bg = colors.bg2 })
   -- }}}
 
   -- { Window Colors {{{
+  hl(0, "NormalFloat", { bg = "NONE" })
   hl(0, "FloatDarkBg", { bg = colors.bg0, fg = "NONE" })
-  hl(0, "FloatDarkBorder", { bg = colors.bg2, fg = "NONE" })
+  hl(0, "FloatDarkBorder", { bg = colors.bg1, fg = colors.fg1 })
   -- }}}
 end
 

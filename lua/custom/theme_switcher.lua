@@ -78,6 +78,12 @@ local function open_theme_switcher()
     theme_switcher_path = vim.fn.stdpath('config') .. '\\bin\\nvim-themes'
   end
 
+  vim.keymap.set("t", "q", function()
+    if vim.api.nvim_win_is_valid(state.win) then
+      vim.api.nvim_win_close(state.win, true)
+    end
+  end, { buffer = state.buf, nowait = true, desc = "Close Theme Switcher" })
+
   vim.fn.jobstart(theme_switcher_path, {
     term = true,
     on_exit = function(_, exit_code)
@@ -94,8 +100,3 @@ local function open_theme_switcher()
 end
 
 vim.keymap.set('n', '<leader>ts', open_theme_switcher, { desc = "Theme Switcher" })
-vim.keymap.set({ "t" }, "q", function()
-  if vim.api.nvim_win_is_valid(state.win) then
-    vim.api.nvim_win_close(state.win, true)
-  end
-end, { buffer = state.buf, nowait = true, desc = "Close Theme Switcher" })
