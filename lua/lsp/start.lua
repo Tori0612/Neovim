@@ -1,5 +1,6 @@
 -- @p lua/lsp/start.lua
-local servers = { "lua_ls", "ts_ls", "pyright", "gopls", "vimls", "bashls", "clangd", "tinymist" }
+local servers = { "lua_ls", "ts_ls", "pyright", "gopls", "vimls", "bashls",
+  "clangd", "tinymist", 'zls', 'lemminx', 'clojure_lsp', "gleam" }
 local capabilities = require("helpers.capabilities").get_capabilities()
 local is_windows = vim.fn.has("win32") == 1
 

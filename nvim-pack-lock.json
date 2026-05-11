@@ -8,6 +8,10 @@
       "rev": "f85eb6252f4c0212be15c6c4213e9af587574cbe",
       "src": "https://github.com/saghen/blink.cmp"
     },
+    "conjure": {
+      "rev": "f7a375995a19fbf085707ea0fdb1f9c167e27e27",
+      "src": "https://github.com/Olical/conjure"
+    },
     "copilot.lua": {
       "rev": "1eecd6c47e2b1c1a7affaa23a3ab61d344be56d1",
       "src": "https://github.com/zbirenbaum/copilot.lua"
@@ -83,6 +87,10 @@
     "undotree": {
       "rev": "fc28931fbfba66ab75d9af23fe46ffbbb9de6e8c",
       "src": "https://github.com/mbbill/undotree"
+    },
+    "vimtex": {
+      "rev": "9306903316c3ddd250676b7cf97c84a84c9c8f99",
+      "src": "https://github.com/lervag/vimtex"
     }
   }
 }

@@ -10,6 +10,7 @@ require('custom.jumper')          -- inspiration: @l https://github.com/ThePrime
 require('custom.statusline')      -- inspiration: @l https://github.com/nvim-lualine/lualine.nvim
 require('custom.termtools')        -- inspiration: @l https://github.com/akinsho/toggleterm.nvim
 require('custom.arvex')
+-- require('custom.secret_env').setup()
 require('custom.theme_switcher')
 require('custom.highlights')
 require('custom.toc')

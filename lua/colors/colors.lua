@@ -1,47 +1,48 @@
--- Catppuccin Mocha color palette
+-- Gruvbox color palette (dark mode)
 return {
   -- Background shades (darkest to lightest)
-  bg0 = "#11111b",  -- crust
-  bg1 = "#181825",  -- mantle
-  bg2 = "#1e1e2e",  -- base
-  bg3 = "#313244",  -- surface0
-  bg4 = "#45475a",  -- surface1
+  bg0 = "#1d2021",  -- hard
+  bg1 = "#282828",  -- normal
+  bg2 = "#3c3836",
+  bg3 = "#504945",
+  bg4 = "#665c54",
 
   -- Foreground shades (dimmest to brightest)
-  fg0 = "#6c7086",  -- overlay0
-  fg1 = "#a6adc8",  -- subtext0
-  fg2 = "#cdd6f4",  -- text
-  fg3 = "#f5e0dc",  -- rosewater
+  fg0 = "#a89984",
+  fg1 = "#bdae93",
+  fg2 = "#d5c4a1",
+  fg3 = "#ebdbb2",
+  fg4 = "#fbf1c7",
 
   -- Core accent colors
-  red = "#f38ba8",
-  orange = "#fab387",
-  yellow = "#f9e2af",
-  green = "#a6e3a1",
-  cyan = "#94e2d5",
-  blue = "#89b4fa",
-  purple = "#cba6f7",
-  magenta = "#f5c2e7",  -- pink
+  red = "#fb4934",
+  orange = "#fe8019",
+  yellow = "#fabd2f",
+  green = "#b8bb26",
+  cyan = "#8ec07c",    -- aqua
+  blue = "#83a598",
+  purple = "#d3869b",
+  magenta = "#d3869b",
 
-  -- Additional accents
-  bright_red = "#eba0ac",     -- maroon
-  bright_orange = "#f5e0dc",  -- rosewater
-  bright_yellow = "#f9e2af",
-  bright_green = "#a6e3a1",
-  bright_cyan = "#89dceb",    -- sky
-  bright_blue = "#b4befe",    -- lavender
-  bright_purple = "#cba6f7",
-  bright_magenta = "#f5c2e7",
+  -- Dim variants
+  bright_red = "#cc241d",
+  bright_orange = "#d65d0e",
+  bright_yellow = "#d79921",
+  bright_green = "#98971a",
+  bright_cyan = "#689d6a",
+  bright_blue = "#458588",
+  bright_purple = "#b16286",
+  bright_magenta = "#b16286",
 
   -- Semantic UI colors
-  normal  = "#89b4fa",  -- blue (strong identity)
-  insert  = "#a6e3a1",  -- green (clear and readable)
-  visual  = "#cba6f7",  -- purple (distinct from blue)
-  replace = "#f38ba8",  -- red-pink (better than pure red here)
-  command = "#fab387",  -- peach (more visible than yellow)
+  normal  = "#83a598",  -- blue (signature gruv tone)
+  insert  = "#b8bb26",  -- green (classic gruv)
+  visual  = "#d3869b",  -- purple
+  replace = "#fb4934",  -- strong red
+  command = "#fe8019",  -- orange (better than yellow here)
 
   -- Special
-  comment = "#6c7086",
-  selection = "#585b70",
-  border = "#89b4fa",
+  comment = "#928374",  -- gray
+  selection = "#504945",
+  border = "#fe8019",
 }

@@ -15,7 +15,48 @@ local state = {
   term = { buf = -1, win = -1, cmd = vim.o.shell },
   lazygit = { buf = -1, win = -1, cmd = "lazygit" },
   lazydocker = { buf = -1, win = -1, cmd = "lazydocker" },
+  tsmanager = { buf = -1, win = -1, cmd = vim.o.shell },
 }
+
+local ts_items = {
+  "Install",
+  "Remove",
+  "List",
+  "Quit",
+}
+
+local ts_index = 1
+
+local function close_later(win, ms)
+  vim.defer_fn(function()
+    if vim.api.nvim_win_is_valid(win) then
+      vim.api.nvim_win_close(win, true)
+    end
+  end, ms or 1500)
+end
+
+local function append_log(buf, line)
+  vim.api.nvim_set_option_value("modifiable", true, { buf = buf })
+
+  local last = vim.api.nvim_buf_line_count(buf)
+
+  vim.api.nvim_buf_set_lines(buf, last, last, false, { line })
+
+  vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
+end
+
+local function start_log(buf, title)
+  vim.api.nvim_set_option_value("modifiable", true, { buf = buf })
+
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, {
+    "󰣇 Tree-sitter Manager",
+    "",
+    title,
+    ""
+  })
+
+  vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
+end
 
 local function toggle_tool(tool_name)
   local tool = state[tool_name]
@@ -45,6 +86,88 @@ local function toggle_tool(tool_name)
 
   vim.api.nvim_set_option_value("winhl", "NormalFloat:FloatDarkBg,FloatBorder:FloatDarkBorder", { win = tool.win })
   vim.api.nvim_set_option_value("winblend", 3, { win = tool.win })
+
+  local function render_ts_menu(buf)
+    local lines = { "󰣇 Tree-sitter Manager", "" }
+
+    for i, item in ipairs(ts_items) do
+      local prefix = (i == ts_index) and " " or " "
+      table.insert(lines, prefix .. item)
+    end
+
+    vim.api.nvim_set_option_value("modifiable", true, { buf = tool.buf })
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+    vim.api.nvim_set_option_value("modifiable", false, { buf = tool.buf })
+  end
+
+  if tool_name == 'tsmanager' then
+    render_ts_menu(tool.buf)
+
+    local map = vim.keymap.set
+
+    map("n", "j", function()
+      ts_index = math.min(ts_index + 1, #ts_items)
+      render_ts_menu(tool.buf)
+    end, { buffer = tool.buf })
+
+    map("n", "k", function()
+      ts_index = math.max(ts_index - 1, 1)
+      render_ts_menu(tool.buf)
+    end, { buffer = tool.buf })
+
+    map("n", "<CR>", function()
+      local ts = require("custom.treesitter_manager")
+      local choice = ts_items[ts_index]
+
+      if choice == "Install" then
+        vim.ui.input({ prompt = "Git URL: " }, function(url)
+          if url and url ~= "" then
+            start_log(tool.buf, "󰣇 Installing parser...")
+            ts.set_logger(function(level, msg)
+              local icons = {
+                step = "⏳ ",
+                info = "󰈞 ",
+                success = "✔ ",
+                warn = "⚠ ",
+                error = "✖ ",
+              }
+
+              append_log(tool.buf, (icons[level] or "") .. msg)
+            end)
+
+            ts.install(url)
+            close_later(tool.win, 6400)
+          end
+        end)
+      elseif choice == "Remove" then
+        vim.ui.input({ prompt = "Language: " }, function(lang)
+          if lang and lang ~= "" then
+            ts.remove(lang)
+            close_later(tool.win, 2400)
+          end
+        end)
+      elseif choice == "List" then
+        ts.list()
+        close_later(tool.win, 2700)
+      elseif choice == "Quit" then
+        vim.api.nvim_win_close(tool.win, true)
+      end
+    end, { buffer = tool.buf })
+
+    map("n", "q", function()
+      vim.api.nvim_win_close(tool.win, true)
+    end, { buffer = tool.buf })
+
+    vim.bo[tool.buf].buftype = "nofile"
+    vim.bo[tool.buf].bufhidden = "wipe"
+    vim.bo[tool.buf].swapfile = false
+    vim.bo[tool.buf].modifiable = false
+
+    vim.api.nvim_set_current_win(tool.win)
+    vim.cmd("normal! gg")
+
+    return
+  end
 
   if vim.bo[tool.buf].buftype ~= "terminal" then
     local opts = {
@@ -84,3 +207,4 @@ end
 vim.keymap.set({ "n", "t" }, "<C-\\>", function() toggle_tool("term") end, { desc = "Toggle Terminal" })
 vim.keymap.set({ "n" }, "<leader>tg", function() toggle_tool("lazygit") end, { desc = "Toggle Lazygit" })
 vim.keymap.set({ "n" }, "<leader>td", function() toggle_tool("lazydocker") end, { desc = "Toggle Lazydocker" })
+vim.keymap.set("n", "<leader>tm", function() toggle_tool("tsmanager") end, { desc = "Toggle TSManager" })

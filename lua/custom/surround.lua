@@ -1,7 +1,9 @@
 -- @p lua/custom/surround.lua
+--
 -- ╭──────────────────────────────────────────────────────────╮
 -- │                       Surround                           │
 -- ╰──────────────────────────────────────────────────────────╯
+--
 -- This "native plugin" is kind of a try to achieve the same behavior as vim-surround
 -- (@l https://github.com/tpope/vim-surround ) but at the end it may not work as
 -- expected sometimes, like, i couldn't make it so that it would wait till the surrounder
@@ -36,6 +38,7 @@ local actions = {
                   { open = '{', close = '}' },
                   { open = '_', close = '_' },
                   { open = '*', close = '*' },
+                  { open = "$", close = "$" }
                 }
 
 local utils = { main_reg = '<C-r>"', leave_esc = '<Right><Esc>', delete_additional = '<Right><C-h><C-h>' }
@@ -47,7 +50,7 @@ for _, act in ipairs(actions) do
   map('v', 'gt' .. act.open, 'c' .. utils.delete_additional .. act.open .. utils.main_reg .. act.close .. utils.leave_esc,
     { noremap = true, desc = "(Go Turn) turns the surrounding of a selected code into another surrounding" })
   for name, pat in pairs(patterns) do
-    vim.keymap.set("n", 'ys' .. pat .. 'w', 'v' .. pat .. 'wgs', { remap = true })
+    map("n", 'ys' .. pat .. 'w', 'v' .. pat .. 'wgs', { remap = true })
     if name == "inside" then
       for _, aa in ipairs(actions) do
         map("n", "yt" .. pat .. act.open .. aa.open, 'v' .. pat .. act.open .. 'gt' .. aa.open, { remap = true })

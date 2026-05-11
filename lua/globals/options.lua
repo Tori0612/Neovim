@@ -47,6 +47,16 @@ end
 vim.opt.undodir = undodir
 -- }}}
 
+-- { Clojure Specific Configs {{{
+vim.g["conjure#log#wrap"] = false
+vim.g["conjure#log#hud#enabled"] = true
+vim.g["conjure#log#botright"] = true
+vim.g["conjure#log#split"] = "right"
+vim.g["conjure#log#width"] = 0.42
+
+vim.g["conjure#client#clojure#nrepl#connection#auto_repl#enabled"] = false
+-- }}}}
+
 -- { Folding and Some More Weird settings {{{
 vim.opt.foldenable = false
 vim.opt.foldlevel = 99
