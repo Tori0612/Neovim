@@ -15,4 +15,18 @@ return {
       ]], { i(1) }
     )
   ),
+  s({ trig = "map", snippetType = "snippet" },
+    fmta(
+      [[
+      map("<>", "<>", <>, <>)
+      ]],
+      { i(1, "mode"), i(2, "combo"), i(3, "command"), i(0)}
+  )),
+  s({ trig = "lmap", snippetType = "snippet" },
+    fmta(
+      [[
+      map("<>", "<<leader>><>", <>, <>)
+      ]],
+      { i(1, "mode"), i(2, "combo"), i(3, "command"), i(0)}
+  )),
 }

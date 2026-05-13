@@ -1,14 +1,8 @@
 -- @p lua/plugins/_init.lua
-require('plugins.jdtls')
-require('plugins.snippets')
-require('plugins.mini_pick')
-require('plugins.mini_pairs')
-require('plugins.oil')
-require('plugins.mason')
-require('plugins.cmp')
-require('plugins.copilot')
-require('plugins.conjure')
-require('plugins.emmet')
-require('plugins.typst-preview')
-require('plugins.vimtex')
-require('plugins.undotree')
+local loader = require('utils.loader')
+
+loader.load('plugins', {
+  'jdtls', 'snippets', 'mini', 'oil', 'mason',
+  'cmp', 'copilot', 'conjure', 'emmet', 'typst-preview',
+  'vimtex', 'undotree'
+})

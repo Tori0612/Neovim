@@ -4,5 +4,9 @@
 -- it'll overwrite anything in these files, i'll try improving its colors in the future, cuz i did the
 -- logic of it, but i was too lazy to search the colors by myself so i asked gemini to do it, and ...,
 -- the colors have nothing to do with the colorschemes
-require("colors.colorscheme")
-require("colors.colors")
+local loader = require('utils.loader')
+
+loader.load('colors', {
+  'colorscheme',
+  'colors',
+})

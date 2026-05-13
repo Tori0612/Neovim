@@ -1,5 +1,5 @@
 -- @p lua/plugins/emmet.lua
-local gh = require("helpers.github").gh
+local gh = require("utils.github").gh
 vim.pack.add({ { src = gh("mattn/emmet-vim") } })
 
 vim.api.nvim_create_autocmd("FileType", {

@@ -5,12 +5,16 @@
 -- tried doing my own version of them, and the last three ones i thought of doing on the
 -- process of configuring stuff.
 
-require('custom.surround')        -- inspiration: @l https://github.com/tpope/vim-surround
-require('custom.jumper')          -- inspiration: @l https://github.com/ThePrimeagen/harpoon
-require('custom.statusline')      -- inspiration: @l https://github.com/nvim-lualine/lualine.nvim
-require('custom.termtools')        -- inspiration: @l https://github.com/akinsho/toggleterm.nvim
-require('custom.arvex')
+local loader = require('utils.loader')
+
+loader.load('custom', {
+  'surround',           -- inspiration: @l https://github.com/tpope/vim-surround
+  'jumper',             -- inspiration: @l https://github.com/ThePrimeagen/harpoon
+  'statusline',         -- inspiration: @l https://github.com/nvim-lualine/lualine.nvim
+  'termtools',          -- inspiration: @l https://github.com/akinsho/toggleterm.nvim
+  'arvex', 'theme_switcher', 'highlights', 'toc',
+  -- 'treesitter_manager'
+})
+
 -- require('custom.secret_env').setup()
-require('custom.theme_switcher')
-require('custom.highlights')
-require('custom.toc')
+-- require('custom.treesitter_manager')

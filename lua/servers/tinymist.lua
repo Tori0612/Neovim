@@ -42,8 +42,8 @@ local function create_tinymist_command(command_name, client, bufnr)
 end
 
 
-local cmd = require("helpers.lsp")
-local capabilities = require("helpers.capabilities").get_capabilities()
+local cmd = require("lsp.cmd")
+local capabilities = require("lsp.capabilities").get_capabilities()
 
 -- │ @TINYMIST_CONFIG │
 ---@type vim.lsp.Config

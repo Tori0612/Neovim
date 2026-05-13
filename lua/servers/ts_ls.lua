@@ -43,8 +43,8 @@
 --- It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
 ---
 
-local cmd = require("helpers.lsp")
-local capabilities = require("helpers.capabilities").get_capabilities()
+local cmd = require("lsp.cmd")
+local capabilities = require("lsp.capabilities").get_capabilities()
 
 -- │ @TS_LS_CONFIG │
 ---@type vim.lsp.Config

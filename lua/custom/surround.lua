@@ -29,7 +29,7 @@
 -- e.g. you can do `yti[(` on a code surrounded by brackets to change the surrounder to parenthesis
 -- [something coded] ==> (something coded)
 
-local map = vim.keymap.set
+local map = require("utils.map")
 
 local actions = {
                   { open = '"', close = '"' },
@@ -45,15 +45,15 @@ local utils = { main_reg = '<C-r>"', leave_esc = '<Right><Esc>', delete_addition
 local patterns = { arround = 'a', inside = 'i' }
 
 for _, act in ipairs(actions) do
-  map("v", 'gs' .. act.open, 'c' .. act.open .. utils.main_reg .. act.close .. utils.leave_esc,
+  map.v('gs' .. act.open, 'c' .. act.open .. utils.main_reg .. act.close .. utils.leave_esc,
     { noremap = true, desc = "(Go Surround) surrounds the selected code with a desired symbol" })
-  map('v', 'gt' .. act.open, 'c' .. utils.delete_additional .. act.open .. utils.main_reg .. act.close .. utils.leave_esc,
+  map.v('gt' .. act.open, 'c' .. utils.delete_additional .. act.open .. utils.main_reg .. act.close .. utils.leave_esc,
     { noremap = true, desc = "(Go Turn) turns the surrounding of a selected code into another surrounding" })
   for name, pat in pairs(patterns) do
-    map("n", 'ys' .. pat .. 'w', 'v' .. pat .. 'wgs', { remap = true })
+    map.n('ys' .. pat .. 'w', 'v' .. pat .. 'wgs', { remap = true })
     if name == "inside" then
       for _, aa in ipairs(actions) do
-        map("n", "yt" .. pat .. act.open .. aa.open, 'v' .. pat .. act.open .. 'gt' .. aa.open, { remap = true })
+        map.n("yt" .. pat .. act.open .. aa.open, 'v' .. pat .. act.open .. 'gt' .. aa.open, { remap = true })
       end
     end
   end

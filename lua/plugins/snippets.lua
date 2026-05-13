@@ -1,5 +1,5 @@
 -- @p lua/plugins/snippets.lua
-local gh = require('helpers.github').gh
+local gh = require('utils.github').gh
 vim.pack.add({ { src = gh("L3MON4D3/LuaSnip") } })
 
 local config = vim.fn.stdpath("config")

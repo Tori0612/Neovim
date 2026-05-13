@@ -1,5 +1,5 @@
 -- @p lua/colors/colorscheme.lua
-local gh = require('helpers.github').gh
+local gh = require('utils.github').gh
 
 vim.pack.add({
   { src = gh("rebelot/kanagawa.nvim") }

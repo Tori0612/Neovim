@@ -85,8 +85,8 @@ local function get_root_dir(fname)
   return vim.fs.root(fname, 'go.work') or vim.fs.root(fname, 'go.mod') or vim.fs.root(fname, '.git')
 end
 
-local cmd = require("helpers.lsp")
-local capabilities = require("helpers.capabilities").get_capabilities()
+local cmd = require("lsp.cmd")
+local capabilities = require("lsp.capabilities").get_capabilities()
 
 -- │ @GOPLS_CONFIG │
 ---@type vim.lsp.Config

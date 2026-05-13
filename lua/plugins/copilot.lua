@@ -1,5 +1,5 @@
 -- @p lua/plugins/copilot.lua
-local gh = require('helpers.github').gh
+local gh = require('utils.github').gh
 
 local function start_copilot()
   vim.pack.add({ { src = gh('zbirenbaum/copilot.lua') } })

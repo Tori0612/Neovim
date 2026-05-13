@@ -52,7 +52,7 @@ local function is_library(fname)
   end
 end
 
-local cmd = require("helpers.lsp")
+local cmd = require("lsp.cmd")
 
 -- │ @RUST_ANALYZER_CONFIG │
 ---@type vim.lsp.Config

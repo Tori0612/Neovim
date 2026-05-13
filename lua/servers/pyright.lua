@@ -21,8 +21,8 @@ local function set_python_path(command)
   end
 end
 
-local cmd = require("helpers.lsp")
-local capabilities = require("helpers.capabilities").get_capabilities()
+local cmd = require("lsp.cmd")
+local capabilities = require("lsp.capabilities").get_capabilities()
 
 -- │ @PYRIGHT_CONFIG │
 ---@type vim.lsp.Config

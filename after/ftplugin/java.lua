@@ -1,6 +1,6 @@
 -- @p after/ftplugin/java.lua
 local jdtls = require('jdtls')
-local capabilities = require("helpers.capabilities").get_capabilities()
+local capabilities = require("lsp.capabilities").get_capabilities()
 
 local root_markers = {'.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle'}
 local root_dir = require('jdtls.setup').find_root(root_markers)

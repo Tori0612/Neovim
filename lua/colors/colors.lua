@@ -1,48 +1,48 @@
--- Gruvbox color palette (dark mode)
+-- Kanagawa Wave Pallete
+-- theme: kanagawa-wave
 return {
-  -- Background shades (darkest to lightest)
-  bg0 = "#1d2021",  -- hard
-  bg1 = "#282828",  -- normal
-  bg2 = "#3c3836",
-  bg3 = "#504945",
-  bg4 = "#665c54",
+  -- Background shades
+  bg0 = "#16161D",  -- sumiInk0
+  bg1 = "#1F1F28",  -- sumiInk1
+  bg2 = "#2A2A37",  -- sumiInk2
+  bg3 = "#363646",  -- sumiInk3
+  bg4 = "#54546D",  -- sumiInk4
 
-  -- Foreground shades (dimmest to brightest)
-  fg0 = "#a89984",
-  fg1 = "#bdae93",
-  fg2 = "#d5c4a1",
-  fg3 = "#ebdbb2",
-  fg4 = "#fbf1c7",
+  -- Foreground shades
+  fg0 = "#727169",
+  fg1 = "#C8C093",  -- oldWhite
+  fg2 = "#DCD7BA",  -- fujiWhite
+  fg3 = "#DCD7BA",
 
   -- Core accent colors
-  red = "#fb4934",
-  orange = "#fe8019",
-  yellow = "#fabd2f",
-  green = "#b8bb26",
-  cyan = "#8ec07c",    -- aqua
-  blue = "#83a598",
-  purple = "#d3869b",
-  magenta = "#d3869b",
+  red     = "#C34043",  -- autumnRed
+  orange  = "#C0A36E",  -- boatYellow1 (warm, readable against dark bg)
+  yellow  = "#E6C384",  -- carpYellow
+  green   = "#98BB6C",  -- autumnGreen
+  cyan    = "#7FB4CA",  -- crystalBlue
+  blue    = "#7E9CD8",  -- springBlue
+  purple  = "#957FB8",  -- oniViolet
+  magenta = "#B8B4D0",  -- springViolet1
 
-  -- Dim variants
-  bright_red = "#cc241d",
-  bright_orange = "#d65d0e",
-  bright_yellow = "#d79921",
-  bright_green = "#98971a",
-  bright_cyan = "#689d6a",
-  bright_blue = "#458588",
-  bright_purple = "#b16286",
-  bright_magenta = "#b16286",
+  -- Bright variants
+  bright_red     = "#E46876",  -- peachRed
+  bright_orange  = "#C0A36E",
+  bright_yellow  = "#E6C384",
+  bright_green   = "#76946A",  -- winterGreen
+  bright_cyan    = "#7AA89F",  -- waveAqua2
+  bright_blue    = "#7FB4CA",  -- crystalBlue
+  bright_purple  = "#957FB8",
+  bright_magenta = "#D27E99",  -- sakuraPink (same as dragon, present in wave too)
 
   -- Semantic UI colors
-  normal  = "#83a598",  -- blue (signature gruv tone)
-  insert  = "#b8bb26",  -- green (classic gruv)
-  visual  = "#d3869b",  -- purple
-  replace = "#fb4934",  -- strong red
-  command = "#fe8019",  -- orange (better than yellow here)
+  normal  = "#7E9CD8",  -- springBlue
+  insert  = "#98BB6C",  -- autumnGreen
+  visual  = "#957FB8",  -- oniViolet
+  replace = "#E46876",  -- peachRed
+  command = "#C0A36E",  -- boatYellow1
 
   -- Special
-  comment = "#928374",  -- gray
-  selection = "#504945",
-  border = "#fe8019",
+  comment   = "#54546D",
+  selection = "#2D4F67",  -- waveBlue2
+  border    = "#957FB8",
 }

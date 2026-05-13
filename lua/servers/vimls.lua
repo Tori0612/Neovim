@@ -8,7 +8,7 @@
 --- ```
 
 -- local cmd = require("helpers.lsp")
-local capabilities = require("helpers.capabilities").get_capabilities()
+local capabilities = require("lsp.capabilities").get_capabilities()
 
 -- │ @VIMLS_CONFIG │
 ---@type vim.lsp.Config

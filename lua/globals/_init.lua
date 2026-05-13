@@ -3,8 +3,16 @@
 -- Its worth noting that this section is initialized before all others. About then, the settings (options)
 -- are nicely organized and you can find pretty much everything that you need to know, and about the keymaps,
 -- all have description, so its pretty easy to get, check inside @p lua/globals/completion.lua to see more about it.
+local loader = require('utils.loader')
 
-require('globals.options')
-require('globals.autocmds')
+loader.load('globals', {
+  'ftypes',
+  'options',
+  'autocmds',
+  'keymaps',
+})
+
+require('globals.env').load()
+
 -- require('globals.completion')
-require('globals.keymaps')
+-- require('globals.vimtex')

@@ -36,6 +36,10 @@
       "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
       "src": "https://github.com/mason-org/mason.nvim"
     },
+    "mini.extra": {
+      "rev": "cf027da13fd217cfe3af6ef978d0e947c7ee0f7a",
+      "src": "https://github.com/nvim-mini/mini.extra"
+    },
     "mini.pairs": {
       "rev": "4089aa6ea6423e02e1a8326a7a7a00159f6f5e04",
       "src": "https://github.com/echasnovski/mini.pairs"

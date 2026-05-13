@@ -23,6 +23,8 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.signcolumn = "number"
 vim.opt.termguicolors = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 -- }}}
 
 -- { Visual Configs (that are not necessarily appearance) {{{

@@ -61,8 +61,8 @@ end
 ---@class ClangdInitializeResult: lsp.InitializeResult
 ---@field offsetEncoding? string
 
-local cmd = require("helpers.lsp")
-local capabilities = require("helpers.capabilities").get_capabilities()
+local cmd = require("lsp.cmd")
+local capabilities = require("lsp.capabilities").get_capabilities()
 
 -- │ @CLANGD_CONFIG │
 ---@type vim.lsp.Config

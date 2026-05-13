@@ -24,7 +24,10 @@ local function apply_highlights()
   hl(0, "HeaderBorder", { fg = colors.bg2, force = true })
 
   -- @t [ Folder Header ]
-  hl(0, "TocTitleHeader", { fg = colors.green, bold = true })
+  hl(0, "TocTitleHeader", { fg = colors.magenta, bold = true })
+
+  -- @t [ Title Line ]
+  hl(0, "TitleLine", { fg = colors.comment, bg = colors.yellow, bold = true })
 
   -- @t [ LSP Config ]
   hl(0, "LSPMark", { fg = colors.fg0, bg = colors.bright_blue, bold = true, italic = true })
@@ -67,7 +70,7 @@ local function apply_matches()
   vim.fn.matchadd("FilePath", file_pat, 100)
   vim.fn.matchadd("LinkUrl", link_pat, 100)
   vim.fn.matchadd("TocTitleHeader", folder_pat, 110)
-  vim.fn.matchadd("TocTitleHeader", title_pat, 110)
+  vim.fn.matchadd("TitleLine", title_pat, 110)
   vim.fn.matchadd("LSPMark", lsp_pat, 100)
 end
 

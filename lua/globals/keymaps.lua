@@ -10,6 +10,11 @@ local map = vim.keymap.set
 map("n", "<leader>pl", vim.cmd.Ex, { desc = "Open File Explorer (netrw)" })
 map("i", "jj", "<Esc>", { noremap = true, silent = true, desc = "Escape Insert Mode" })
 map("n", "<leader>so", ":update<CR> :source<CR>", { desc = "Save and Source File" })
+
+map("n", "<leader>e", ":vs ", { desc = "Quick for Editing a new file" })
+map("n", "<leader>q", ":wq<CR>", { desc = "Quick for Save Quiting a File"})
+map("n", "<leader>w", ":w<CR>", { desc = "Quick for Saving a File"})
+
 map("n", "<leader>lf", vim.lsp.buf.format, { desc = "Trigger Language Format" })
 map("n", "<leader>==", "ggVG=", { desc = "Indent whole file 'correctly'"})
 -- }}}

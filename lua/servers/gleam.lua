@@ -6,7 +6,7 @@
 ---
 --- It comes with the Gleam compiler, for installation see: [Installing Gleam](https://gleam.run/getting-started/installing/)
 
-local capabilities = require("helpers.capabilities").get_capabilities()
+local capabilities = require("lsp.capabilities").get_capabilities()
 
 -- │ @GLEAM_CONFIG │
 ---@type vim.lsp.Config

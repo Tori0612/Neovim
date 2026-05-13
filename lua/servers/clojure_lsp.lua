@@ -4,8 +4,8 @@
 ---
 --- Clojure Language Server
 
-local cmd = require("helpers.lsp")
-local capabilities = require("helpers.capabilities").get_capabilities()
+local cmd = require("lsp.cmd")
+local capabilities = require("lsp.capabilities").get_capabilities()
 
 -- │ @CLOJURE_LSP_CONFIG│
 ---@type vim.lsp.Config

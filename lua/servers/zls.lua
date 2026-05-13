@@ -5,8 +5,8 @@
 
 local zig_path = vim.env.ZIG_PATH or "zig"
 
-local cmd = require("helpers.lsp")
-local capabilities = require("helpers.capabilities").get_capabilities()
+local cmd = require("lsp.cmd")
+local capabilities = require("lsp.capabilities").get_capabilities()
 
 -- │ @ZLS_CONFIG │
 ---@type vim.lsp.Config

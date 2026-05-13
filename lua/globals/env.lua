@@ -1,4 +1,4 @@
--- @p lua/helpers/env.lua
+-- @p lua/globals/env.lua
 -- This helper looks for a .env file, in a way that you can set things like your python path,
 -- which is pretty useful for having different venvs, and also a way to point to your lsps if not,
 -- installed with mason, check on @p lua/helpers/lsp.lua to see how to set and get your lsps in .env

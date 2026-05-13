@@ -79,8 +79,8 @@ local root_markers2 = {
   'selene.yml',
 }
 
-local cmd = require("helpers.lsp")
-local capabilities = require("helpers.capabilities").get_capabilities()
+local cmd = require("lsp.cmd")
+local capabilities = require("lsp.capabilities").get_capabilities()
 
 -- │ @LUA_LS_CONFIG │
 ---@type vim.lsp.Config

@@ -1,5 +1,5 @@
 -- @p lua/plugins/oil.lua
-local gh = require('helpers.github').gh
+local gh = require('utils.github').gh
 vim.pack.add({ { src = gh('stevearc/oil.nvim') } })
 
 require("oil").setup({

@@ -11,6 +11,8 @@
 -- this into different customs, but i dont think logic will get that complicated.
 local is_windows = vim.fn.has("win32") == 1
 
+local map = require('utils.map')
+
 local state = {
   term = { buf = -1, win = -1, cmd = vim.o.shell },
   lazygit = { buf = -1, win = -1, cmd = "lazygit" },
@@ -103,19 +105,18 @@ local function toggle_tool(tool_name)
   if tool_name == 'tsmanager' then
     render_ts_menu(tool.buf)
 
-    local map = vim.keymap.set
 
-    map("n", "j", function()
+    map.n("j", function()
       ts_index = math.min(ts_index + 1, #ts_items)
       render_ts_menu(tool.buf)
     end, { buffer = tool.buf })
 
-    map("n", "k", function()
+    map.n("k", function()
       ts_index = math.max(ts_index - 1, 1)
       render_ts_menu(tool.buf)
     end, { buffer = tool.buf })
 
-    map("n", "<CR>", function()
+    map.n("<CR>", function()
       local ts = require("custom.treesitter_manager")
       local choice = ts_items[ts_index]
 
@@ -154,7 +155,7 @@ local function toggle_tool(tool_name)
       end
     end, { buffer = tool.buf })
 
-    map("n", "q", function()
+    map.n("q", function()
       vim.api.nvim_win_close(tool.win, true)
     end, { buffer = tool.buf })
 
@@ -196,15 +197,15 @@ local function toggle_tool(tool_name)
     })
 
     if tool_name == "term" then
-      vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = tool.buf, desc = "Enables escaping to Normal mode inside the terminal" })
-      vim.keymap.set("t", "jj", "<Esc>", { remap = true, desc = "Escapes to Normal mode inside the terminal" })
+      map.t("<Esc>", [[<C-\><C-n>]], { buffer = tool.buf, desc = "Enables escaping to Normal mode inside the terminal" })
+      map.t("jj", "<Esc>", { remap = true, desc = "Escapes to Normal mode inside the terminal" })
     end
   end
 
   vim.cmd("startinsert")
 end
 
-vim.keymap.set({ "n", "t" }, "<C-\\>", function() toggle_tool("term") end, { desc = "Toggle Terminal" })
-vim.keymap.set({ "n" }, "<leader>tg", function() toggle_tool("lazygit") end, { desc = "Toggle Lazygit" })
-vim.keymap.set({ "n" }, "<leader>td", function() toggle_tool("lazydocker") end, { desc = "Toggle Lazydocker" })
-vim.keymap.set("n", "<leader>tm", function() toggle_tool("tsmanager") end, { desc = "Toggle TSManager" })
+map.nt("<C-\\>", function() toggle_tool("term") end, { desc = "Toggle Terminal" })
+map.n("<leader>tg", function() toggle_tool("lazygit") end, { desc = "Toggle Lazygit" })
+map.n("<leader>td", function() toggle_tool("lazydocker") end, { desc = "Toggle Lazydocker" })
+map.n("<leader>tm", function() toggle_tool("tsmanager") end, { desc = "Toggle TSManager" })
