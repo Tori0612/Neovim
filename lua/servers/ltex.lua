@@ -71,11 +71,15 @@ do
   end
 end
 
+local cmd = require("lsp.cmd")
+local capabilities = require("lsp.capabilities").get_capabilities()
+
 ---@type vim.lsp.Config
 return {
-  cmd = { 'ltex-ls' },
+  cmd = { cmd.get_cmd('ltex-ls', 'ltex-ls') },
   filetypes = filetypes,
-  root_markers = { '.git' },
+  capabilities = capabilities,
+  root_markers = { '.git', '.obsidian' },
   get_language_id = get_language_id,
   settings = {
     ltex = {

@@ -14,9 +14,9 @@ onoremap <buffer> af :<C-u>call search('^\\s*\\(def\\|class\\)\\>', 'bW')<CR>V:<
 
 autocmd BufWritePre <buffer> silent! lua if vim.lsp.get_clients({bufnr=0})[1] then vim.lsp.buf.format({async=false}) end
 
-noremap <buffer> <leader>rr :!python3 %<CR>
-noremap <buffer> <leader>rt :!python3 -m pytest %<CR>
-noremap <buffer> <leader>ri :!python3 -i %<CR>
+noremap <buffer> <leader>rr :call termutils#Run("python3 %")<CR>
+noremap <buffer> <leader>rt :call termutils#Run("python3 -m pytest %")<CR>
+noremap <buffer> <leader>ri :call termutils#Run("python3 -i %")<CR>
 
 setlocal foldmethod=indent
 setlocal foldnestmax=2

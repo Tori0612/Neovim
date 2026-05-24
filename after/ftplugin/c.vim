@@ -14,7 +14,7 @@ if has('win32') || has('win64')
     nnoremap <buffer> <leader>rc :w<CR>:!gcc % -o %<.exe<CR>
     nnoremap <buffer> <leader>re :!%<.exe<CR>
 else
-    nnoremap <buffer> <leader>rr :w<CR>:!gcc "%:p" -o "%:p:r" && "%:p:r"<CR>
-    nnoremap <buffer> <leader>rc :w<CR>:!gcc "%:p" -o "%:p:r"<CR>
-    nnoremap <buffer> <leader>re :!"%:p:r"<CR>
+    nnoremap <buffer> <leader>rr :w<CR>:call termutils#Run("gcc % -o %:r && %:r")<CR>
+    nnoremap <buffer> <leader>rc :w<CR>:call termutils#Run("gcc % -o %:r")<CR>
+    nnoremap <buffer> <leader>re :call termutils#Run("%:r")<CR>
 endif

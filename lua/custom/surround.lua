@@ -1,60 +1,94 @@
--- @p lua/custom/surround.lua
---
--- ╭──────────────────────────────────────────────────────────╮
--- │                       Surround                           │
--- ╰──────────────────────────────────────────────────────────╯
---
--- This "native plugin" is kind of a try to achieve the same behavior as vim-surround
--- (@l https://github.com/tpope/vim-surround ) but at the end it may not work as
--- expected sometimes, like, i couldn't make it so that it would wait till the surrounder
--- was selected (pressed), so you gotta be a little fast for it to work. At the end of the day,
--- it does pretty much of what it is suposed to do, if i'm not mistaken, on `vim-surround` if the,
--- selected code is already surrounded it changes the surrounding, i couldn't achieve it, but i made
--- a different keymap to change (turn) the surrouding.
--- 
--- { Keymaps }
--- gs -> surrounds with something
--- e.g. you can do `gs"` and it surrounds something with double quotes
--- something coded ==> "something coded"
---
--- ys[...] -> surrounds 'inside' or 'arround' a word with something (normally arround is not used)
--- e.g. you can do `ysiw[` to surround a word with brackets
--- something ==> [something]
---
--- gt -> turns the surrounding into another
--- e.g. you can do `gt(` on a code surrounded with brackets and it turns into a code surrounded with parenthesis
--- [something] ==> (something)
--- 
--- yt[...] -> turns the surrounding of a code 'inside' a surrounder.
--- e.g. you can do `yti[(` on a code surrounded by brackets to change the surrounder to parenthesis
--- [something coded] ==> (something coded)
+-- @p lua/custom/surr.lua
 
-local map = require("utils.map")
+local map = require('utils.map')
 
-local actions = {
-                  { open = '"', close = '"' },
-                  { open = '(', close = ')' },
-                  { open = '[', close = ']' },
-                  { open = '{', close = '}' },
-                  { open = '_', close = '_' },
-                  { open = '*', close = '*' },
-                  { open = "$", close = "$" }
-                }
+local default_pairs = {
+  ["'"] = { "'", "'" },
+  ['"'] = { '"', '"' },
+  ['('] = { '(', ')' },
+  ['['] = { '[', ']' },
+  ['{'] = { '{', '}' },
+  ['<'] = { '<', '>' }
+}
 
-local utils = { main_reg = '<C-r>"', leave_esc = '<Right><Esc>', delete_additional = '<Right><C-h><C-h>' }
-local patterns = { arround = 'a', inside = 'i' }
-
-for _, act in ipairs(actions) do
-  map.v('gs' .. act.open, 'c' .. act.open .. utils.main_reg .. act.close .. utils.leave_esc,
-    { noremap = true, desc = "(Go Surround) surrounds the selected code with a desired symbol" })
-  map.v('gt' .. act.open, 'c' .. utils.delete_additional .. act.open .. utils.main_reg .. act.close .. utils.leave_esc,
-    { noremap = true, desc = "(Go Turn) turns the surrounding of a selected code into another surrounding" })
-  for name, pat in pairs(patterns) do
-    map.n('ys' .. pat .. 'w', 'v' .. pat .. 'wgs', { remap = true })
-    if name == "inside" then
-      for _, aa in ipairs(actions) do
-        map.n("yt" .. pat .. act.open .. aa.open, 'v' .. pat .. act.open .. 'gt' .. aa.open, { remap = true })
-      end
-    end
+local function get_pair(char)
+  if vim.b.custom_surround_pairs and vim.b.custom_surround_pairs[char] then
+    return vim.b.custom_surround_pairs[char]
   end
+
+  return default_pairs[char]
 end
+
+-- test
+map.v('s', function()
+  vim.api.nvim_echo({{ 'Surround With: ', "WarningMsg" }}, false, {})
+  local char = vim.fn.getcharstr()
+  vim.api.nvim_command('redraw')
+
+  local pair = get_pair(char)
+  if not pair then
+    print('Invalid surround character')
+    return
+  end
+
+  local cmd = string.format('c%s<C-r>"%s<Right><Esc>', pair[1], pair[2])
+  local keys = vim.api.nvim_replace_termcodes(cmd, true, false, true)
+  vim.api.nvim_feedkeys(keys, 'n', false)
+end, { noremap = true, desc = "Prompt for surround character" })
+
+map.n('sr', function()
+  vim.api.nvim_echo({{ 'Replace What? ', "WarningMsg" }}, false, {})
+  local old_char = vim.fn.getcharstr()
+  vim.api.nvim_command('redraw')
+
+  vim.api.nvim_echo({{ 'Replace With? ', "WarningMsg" }}, false, {})
+  local new_char = vim.fn.getcharstr()
+  vim.api.nvim_command('redraw')
+
+  local new_pair = get_pair(new_char)
+  if not new_pair then
+    print('Invalid surround character')
+    return
+  end
+
+  -- cascach "aaa"
+  local cmd = string.format('di%s"_x"_s%s<C-r>"%s<Esc>', old_char, new_pair[1], new_pair[2])
+  local keys = vim.api.nvim_replace_termcodes(cmd, true, false, true)
+  vim.api.nvim_feedkeys(keys, 'n', false)
+end, { desc = 'Replace surround character' })
+
+map.n('ys', function()
+  vim.o.operatorfunc = "v:lua.SurroundOperator"
+  return "g@"
+end, { expr = true, desc = "Surround with Motion" })
+
+function _G.SurroundOperator()
+  vim.api.nvim_echo({{ 'Surround With: ', "WarningMsg" }}, false, {})
+  local char = vim.fn.getcharstr()
+  vim.api.nvim_command('redraw')
+
+  local pair = get_pair(char)
+  if not pair then
+    print('Invalid surround character')
+    return
+  end
+
+  local cmd = string.format("`[v`]c%s<C-r>\"%s<Esc>", pair[1], pair[2])
+  local keys = vim.api.nvim_replace_termcodes(cmd, true, false, true)
+  vim.api.nvim_feedkeys(keys, 'n', false)
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.opt_local.conceallevel = 2
+        vim.opt_local.concealcursor = "nc"
+
+        vim.b.custom_surround_pairs = {
+            ["b"] = { "**", "**" },
+            ["i"] = { "_", "_" },
+            ["l"] = { "$", "$" },
+            ["c"] = { "`", "`" }
+        }
+    end
+})

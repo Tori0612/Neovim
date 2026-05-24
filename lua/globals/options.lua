@@ -8,40 +8,43 @@ if vim.env.PYTHON_PATH then
 end
 -- }}}
 
+local function apply_options(options)
+  for k, v in pairs(options) do
+    vim.opt[k] = v
+  end
+end
+
 -- { LEADER {{{
 vim.g.mapleader = " "
 -- }}}
 
 -- { Appearance {{{
-vim.opt.nu = true
-vim.opt.relativenumber = true
-vim.opt.guicursor = ""
-vim.opt.cursorline = true
-vim.opt.winborder = "double"
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.signcolumn = "number"
-vim.opt.termguicolors = true
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+local appearance = {
+  nu = true,              relativenumber = true,
+  guicursor = "",         cursorline = true,
+  winborder = "double",   tabstop = 4,
+  softtabstop = 4,        shiftwidth = 4,
+  signcolumn = "number",  termguicolors = true,
+  splitright = true,      splitbelow = true,
+  conceallevel = 2,       concealcursor = 'nc',
+}
 -- }}}
 
 -- { Visual Configs (that are not necessarily appearance) {{{
-vim.opt.expandtab = true
-vim.opt.autoindent= true
-vim.opt.smartindent = false
-vim.opt.cindent = false
-vim.opt.wrap = false
-vim.opt.scrolloff = 10
+local visual = {
+  expandtab = true,     autoindent= true,
+  smartindent = false,  cindent = false,
+  wrap = false,         scrolloff = 10,
+}
 -- }}}
 
 -- { Weird Settings {{{
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.writebackup = false
-vim.opt.backupcopy = "yes"
-vim.opt.undofile = true
+local weird = {
+  swapfile = false,     backup = false,
+  writebackup = false,  backupcopy = "yes",
+  undofile = true,
+}
+
 local undodir = vim.fn.stdpath("state") .. "/undo"
 if vim.fn.isdirectory(undodir) == 0 then
   vim.fn.mdkir(undodir, "p")
@@ -55,18 +58,17 @@ vim.g["conjure#log#hud#enabled"] = true
 vim.g["conjure#log#botright"] = true
 vim.g["conjure#log#split"] = "right"
 vim.g["conjure#log#width"] = 0.42
-
 vim.g["conjure#client#clojure#nrepl#connection#auto_repl#enabled"] = false
 -- }}}}
 
 -- { Folding and Some More Weird settings {{{
-vim.opt.foldenable = false
-vim.opt.foldlevel = 99
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+local fold = {
+  shadafile = vim.fn.stdpath("data") .. "/shada/main.shada",
+  foldenable = false,     foldlevel = 99,
+  hlsearch = false,       incsearch = true,
+  updatetime = 50,
+}
 vim.opt.isfname:append("@-@")
-vim.opt.updatetime = 50
-vim.o.shadafile = vim.fn.stdpath("data") .. "/shada/main.shada"
 -- }}}
 
 -- { Yank Highlighting (TJ's doing) {{{
@@ -88,4 +90,11 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.softtabstop = 2
     end,
 })
+-- }}}
+
+-- { Applying Options {{{
+apply_options(appearance)
+apply_options(visual)
+apply_options(weird)
+apply_options(fold)
 -- }}}

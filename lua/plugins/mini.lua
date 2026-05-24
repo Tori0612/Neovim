@@ -2,17 +2,23 @@
 local gh = require('utils.github').gh
 local map = require('utils.map')
 
-vim.pack.add({ { src = gh('nvim-mini/mini.pick') } })
-vim.pack.add({ { src = gh('nvim-mini/mini.extra') } })
-vim.pack.add({ { src = gh('nvim-mini/mini.pairs') } })
+vim.pack.add({
+  gh('nvim-mini/mini.nvim'),
+  gh('nvim-mini/mini.pick'),
+  gh('nvim-mini/mini.extra'),
+  gh('nvim-mini/mini.icons'),
+  gh('nvim-mini/mini.pairs'),
+})
 
 local MiniPick = require('mini.pick')
 local MiniExtra = require('mini.extra')
 local MiniPairs = require('mini.pairs')
+local MiniIcons = require('mini.icons')
 
 MiniPick.setup()
 MiniExtra.setup()
 MiniPairs.setup()
+MiniIcons.setup()
 
 -- { Mini Pick {{{
 map.n('<leader>ff', function() -- @t [Find Files]

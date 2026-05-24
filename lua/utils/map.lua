@@ -22,6 +22,14 @@ function M.t(lhs, rhs, opts)
   M.map("t", lhs, rhs, opts)
 end
 
+function M.o(lhs, rhs, opts)
+  M.map("o", lhs, rhs, opts)
+end
+
+function M.x(lhs, rhs, opts)
+  M.map("x", lhs, rhs, opts)
+end
+
 function M.nt(lhs, rhs, opts)
   M.map({ "n", "t" }, lhs, rhs, opts)
 end

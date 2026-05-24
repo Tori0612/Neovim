@@ -7,5 +7,5 @@ setlocal commentstring=//\ %s
 
 setlocal makeprg=zig\ build
 
-nnoremap <buffer> <leader>rr :w<CR>:!zig run %<CR>
+nnoremap <buffer> <leader>rr :w<CR>:call termutils#Run("zig run %")<CR>
 nnoremap <buffer> <leader>r :w<CR>:make<CR>

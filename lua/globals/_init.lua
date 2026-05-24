@@ -8,7 +8,7 @@ local loader = require('utils.loader')
 loader.load('globals', {
   'ftypes',
   'options',
-  'autocmds',
+  'commands',
   'keymaps',
 })
 

@@ -9,15 +9,18 @@
 -- and i thought 'hmm, since i made a "custom" toggleterm, then i can try implementing this'
 -- so i started changing stuff, and by now, i'm fine with how it is, maybe later i'll spread
 -- this into different customs, but i dont think logic will get that complicated.
+local M = {}
+
 local is_windows = vim.fn.has("win32") == 1
 
 local map = require('utils.map')
 
 local state = {
-  term = { buf = -1, win = -1, cmd = vim.o.shell },
-  lazygit = { buf = -1, win = -1, cmd = "lazygit" },
-  lazydocker = { buf = -1, win = -1, cmd = "lazydocker" },
-  tsmanager = { buf = -1, win = -1, cmd = vim.o.shell },
+  term = { name = "terminal", buf = -1, win = -1, cmd = vim.o.shell },
+  lazygit = { name = "lazygit", buf = -1, win = -1, cmd = "lazygit" },
+  lazydocker = { name = "lazydocker", buf = -1, win = -1, cmd = "lazydocker" },
+  tsmanager = { name = "tsmanager", buf = -1, win = -1, cmd = vim.o.shell },
+  tetris = { name = 'tetro', buf = -1, win = -1, cmd = 'tetro-tui' },
 }
 
 local ts_items = {
@@ -40,11 +43,22 @@ end
 local function append_log(buf, line)
   vim.api.nvim_set_option_value("modifiable", true, { buf = buf })
 
+  local lines = vim.split(line, "\n", { plain = true })
+
   local last = vim.api.nvim_buf_line_count(buf)
 
-  vim.api.nvim_buf_set_lines(buf, last, last, false, { line })
+  vim.api.nvim_buf_set_lines(buf, last, last, false, lines)
 
   vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
+
+  local win = vim.fn.bufwinid(buf)
+
+  if win ~= -1 then
+    vim.api.nvim_win_set_cursor(win, {
+      vim.api.nvim_buf_line_count(buf),
+      0,
+    })
+  end
 end
 
 local function start_log(buf, title)
@@ -60,8 +74,7 @@ local function start_log(buf, title)
   vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
 end
 
-local function toggle_tool(tool_name)
-  local tool = state[tool_name]
+local function toggle_tool(tool)
   if vim.api.nvim_win_is_valid(tool.win) then
     vim.api.nvim_win_hide(tool.win)
     return
@@ -102,7 +115,7 @@ local function toggle_tool(tool_name)
     vim.api.nvim_set_option_value("modifiable", false, { buf = tool.buf })
   end
 
-  if tool_name == 'tsmanager' then
+  if tool.name == 'tsmanager' then
     render_ts_menu(tool.buf)
 
 
@@ -137,7 +150,7 @@ local function toggle_tool(tool_name)
             end)
 
             ts.install(url)
-            close_later(tool.win, 6400)
+            close_later(tool.win, 67000)
           end
         end)
       elseif choice == "Remove" then
@@ -174,6 +187,9 @@ local function toggle_tool(tool_name)
     local opts = {
       term = true,
       on_exit = function ()
+        if vim.api.nvim_buf_is_valid(tool.buf) then
+          vim.api.nvim_buf_delete(tool.buf, { force = true })
+        end
         tool.buf = -1
         if vim.api.nvim_win_is_valid(tool.win) then
           vim.api.nvim_win_close(tool.win, true)
@@ -196,7 +212,7 @@ local function toggle_tool(tool_name)
       end,
     })
 
-    if tool_name == "term" then
+    if tool.name == "terminal" then
       map.t("<Esc>", [[<C-\><C-n>]], { buffer = tool.buf, desc = "Enables escaping to Normal mode inside the terminal" })
       map.t("jj", "<Esc>", { remap = true, desc = "Escapes to Normal mode inside the terminal" })
     end
@@ -205,7 +221,45 @@ local function toggle_tool(tool_name)
   vim.cmd("startinsert")
 end
 
-map.nt("<C-\\>", function() toggle_tool("term") end, { desc = "Toggle Terminal" })
-map.n("<leader>tg", function() toggle_tool("lazygit") end, { desc = "Toggle Lazygit" })
-map.n("<leader>td", function() toggle_tool("lazydocker") end, { desc = "Toggle Lazydocker" })
-map.n("<leader>tm", function() toggle_tool("tsmanager") end, { desc = "Toggle TSManager" })
+function M.run_cmd(opts)
+  if type(opts) == "string" then
+    opts = { cmd = opts, mode = "hold" }
+  end
+
+  local cmd = opts.cmd
+  local mode = opts.mode or "hold"
+  local full_cmd
+
+  if mode == "hold" then
+    full_cmd = {
+      vim.o.shell,
+      "-c",
+      cmd .. [[; echo; echo "-----------------------"; printf "Process finished. Press ENTER to close..."; read _]]
+    }
+  elseif mode == "repl" then
+    -- full_cmd = {
+    --   vim.o.shell,
+    --   "-ic",
+    --   cmd
+    -- }
+    full_cmd = cmd
+  else
+    full_cmd = cmd
+  end
+
+  local temp_tool = {
+    name = "temp",
+    buf = -1,
+    win = -1,
+    cmd = full_cmd
+  }
+  toggle_tool(temp_tool)
+end
+
+map.nt("<C-\\>", function() toggle_tool(state.term) end, { desc = "Toggle Terminal" })
+map.n("<leader>tg", function() toggle_tool(state.lazygit) end, { desc = "Toggle Lazygit" })
+map.n("<leader>td", function() toggle_tool(state.lazydocker) end, { desc = "Toggle Lazydocker" })
+map.n("<leader>tm", function() toggle_tool(state.tsmanager) end, { desc = "Toggle TSManager" })
+map.n("<leader>tt", function() toggle_tool(state.tetris) end, { desc = "Toggle Tetro-TUI" })
+
+return M

@@ -1,0 +1,17 @@
+{
+  "language": "en",
+  "version": "0.2",
+  "words": [
+    "autocmd",
+    "fastspell",
+    "keymap",
+    "lcase",
+    "lsp",
+    "ltex",
+    "markdown",
+    "neovim",
+    "nvim",
+    "obsidian",
+    "vimrc"
+  ]
+}

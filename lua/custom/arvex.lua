@@ -1,7 +1,11 @@
 -- @p lua/custom/arvex.lua
 local is_windows = vim.fn.has("win32") == 1
 local parser_path = ""
-local languages = { "java", "lua", "go", "c", "zig", "typst", "bash", "ocaml" }
+local languages = {
+  "java", "lua", "go", "c", "zig", "typst", "bash",
+  "ocaml", "zsh", "latex", "markdown", "markdown_inline",
+  "html", "yaml", "haskell",
+}
 
 vim.treesitter.language.register('bash', 'env')
 
@@ -21,7 +25,7 @@ local ts_group = vim.api.nvim_create_augroup("TSManualStart", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
   group = ts_group,
-  pattern = { "java", "lua", "go", "c", "zig", "typst", "bash", "env", "ocaml" },
+  pattern = vim.list_extend(vim.deepcopy(languages), { "env" }),
   callback = function (args)
     local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
     if lang then
