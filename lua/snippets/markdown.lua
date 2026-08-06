@@ -16,4 +16,7 @@ return {
       ]], { i(1, "lang"), i(0, 'code')}
     )
   ),
+  s({ trig = 'prog', snippetType = 'snippet' },
+    fmta("[**PROGRAM**] <>", { i(0, 'title') })
+  )
 }

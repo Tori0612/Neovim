@@ -54,6 +54,14 @@ map.n("<leader>d", "\"_d", { desc = "Delete to Clipboard (normal)" })
 map.v("<leader>d", "\"_d", { desc = "Delete to Clipboard (visual)" })
 -- }}}
 
+-- { Insert Mode Combos {{{
+map.i('<A-o>', '<C-o>', { desc = "OneShot (Insert)" })
+map.i('<A-m>', '<C-m>', { desc = "Enter (Insert)" })
+map.i('<A-h>', '<C-h>', { desc = "Backspace (Insert)" })
+map.i('<A-w>', '<C-w>', { desc = "Delete Word Before (Insert)" })
+map.i('<A-u>', '<C-u>', { desc = "Delete Line (Insert)" })
+-- }}}
+
 -- { WTH {{{
 map.n("Q", "<nop>")
 map.i("<C-c>", "<Esc>", { desc = "Escape Visual Mode" })
@@ -68,24 +76,26 @@ center_map("n", "<leader>j", "<cmd>lprev<CR>")
 
 -- { Some REGEXes and Stuff {{{
 map.n("<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
-  { desc = "Select and Change Word Under Cursor (File Wise)" })
+  { desc = "Select and Change Word Under Cursor (File Wise)", silent = false })
 map.v("<leader>s", "\"hy:%s#<C-r>h#<C-r>h#gI<Left><Left><Left>",
-  { desc = "Select and Change Selected Text (File Wise)" })
+  { desc = "Select and Change Selected Text (File Wise)", silent = false })
 map.n("<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Turn File Into an Executable" })
 map.n("<leader>r", ":s/\\s\\+/\\r/g", { desc = "Spread Line Into Next Lines (per contiguous text)" })
 map.n("<leader>z", "_izx<Esc>u", { desc = "Force Fold Enable" })
 map.v("<leader>bf", 'c{{{<CR><Esc>0p<Up>dd<Up>0%gcc$%gcc0<Right><Right>i<Space>{<Right><C-h><Space>',
   { remap = true, desc = "Make a Block foldable and insert a title" })
+map.x("<leader>ts", ":!column -t -s' '<CR>", { silent = true, desc = "Align with column (by space)" })
+map.x("<leader>te",
+  [[:!column -t<CR>:<C-u>'<,'>s/\s=\s/ =/g<CR>]], { silent = true, desc = "Align with column and fix spacing arround '='" })
 -- }}}
--- {    } --
 
 -- { Lazy Typings {{{
-map.o("i9", "i(", { noremap = true, desc = "Shorter Change Inside Paragraph" })
-map.o("ii", "i[", { noremap = true, desc = "Shorter Change Inside Brackets" })
-map.o("io", "i{", { noremap = true, desc = "Shorter Change Inside Braces" })
-map.o("a9", "a(", { noremap = true, desc = "Shorter Change Around Paragraph" })
-map.o("ai", "a[", { noremap = true, desc = "Shorter Change Around Brackets" })
-map.o("ao", "a{", { noremap = true, desc = "Shorter Change Around Braces" })
+map.ox("i9", "i(", { noremap = true, desc = "Shorter Change Inside Paragraph" })
+map.ox("ii", "i[", { noremap = true, desc = "Shorter Change Inside Brackets" })
+map.ox("io", "i{", { noremap = true, desc = "Shorter Change Inside Braces" })
+map.ox("a9", "a(", { noremap = true, desc = "Shorter Change Around Paragraph" })
+map.ox("ai", "a[", { noremap = true, desc = "Shorter Change Around Brackets" })
+map.ox("ao", "a{", { noremap = true, desc = "Shorter Change Around Braces" })
 -- }}}
 
 -- { File Stuff {{{

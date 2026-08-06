@@ -6,13 +6,13 @@
 local loader = require('utils.loader')
 
 loader.load('globals', {
-  'ftypes',
+  -- 'ftypes',
   'options',
   'commands',
   'keymaps',
 })
 
-require('globals.env').load()
+-- require('globals.env').load()
 
 -- require('globals.completion')
 -- require('globals.vimtex')

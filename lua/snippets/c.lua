@@ -42,5 +42,11 @@ return {
       <>
       ]], { i(0) }
     )
+  ),
+  s({ trig = "printf", snippetType = "snippet" },
+    fmta('printf("<>");', { i(0) })
+  ),
+  s({ trig = "scanf", snippetType = "snippet"},
+    fmta('scanf("<>", <>);', { i(1), i(0) })
   )
 }

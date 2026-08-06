@@ -17,7 +17,7 @@ local MiniIcons = require('mini.icons')
 
 MiniPick.setup()
 MiniExtra.setup()
-MiniPairs.setup()
+-- MiniPairs.setup()
 MiniIcons.setup()
 
 -- { Mini Pick {{{

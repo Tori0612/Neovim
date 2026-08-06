@@ -16,7 +16,7 @@ require("luasnip.loaders.from_lua").load({ paths = path })
 local ls = require("luasnip")
 
 -- { Expand Snippets {{{
-vim.keymap.set({ "i" }, "<C-e>", function () ls.expand() end, { silent = true })
+vim.keymap.set({ "i" }, "<A-e>", function () ls.expand() end, { silent = true })
 -- }}}
 
 -- { Jumpings {{{

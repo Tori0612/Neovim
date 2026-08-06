@@ -34,4 +34,8 @@ function M.nt(lhs, rhs, opts)
   M.map({ "n", "t" }, lhs, rhs, opts)
 end
 
+function M.ox(lhs, rhs, opts)
+  M.map({ "o", "x" }, lhs, rhs, opts)
+end
+
 return M

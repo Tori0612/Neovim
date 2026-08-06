@@ -8,5 +8,5 @@ local loader = require('utils.loader')
 
 loader.load('colors', {
   'colorscheme',
-  'colors',
+  -- 'colors',
 })
