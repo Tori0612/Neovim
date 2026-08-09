@@ -9,6 +9,13 @@ local query_dir = vim.fs.joinpath(
   "/queries"
 )
 
+local dll_ext = ({
+  Windows_NT = 'dll',
+  Darwin = 'dylib',
+})[vim.uv.os_uname().sysname] or 'so'
+
+local parser_pattern = "%." .. dll_ext .. "$"
+
 local logger = function(level, msg)
   vim.notify(msg)
 end
@@ -29,10 +36,11 @@ local function makedir(path, flag)
   vim.fn.mkdir(path, flag)
 end
 
-local function run(cmd, cwd, cb)
+local function run(cmd, cwd, cb, env)
   vim.system(cmd, {
     cwd = cwd,
     text = true,
+    env = env,
   }, function(obj)
     vim.schedule(function()
       if obj.code ~= 0 then
@@ -52,14 +60,14 @@ local function continue_install(repo_path, tmp)
 
     local files = scandir(repo_path)
 
-    local sofile, filename, lang
+    local parser_file, filename, lang
 
     for _, file in ipairs(files) do
-      if file:match("%.so$") then
-        local name = file:gsub("%.so$", "")
+      if file:match(parser_pattern) then
+        local name = file:gsub(parser_pattern, "")
 
         if name ~= "parser" and name ~= "scanner" then
-          sofile = repo_path .. "/" .. file
+          parser_file = repo_path .. "/" .. file
           filename = file
           lang = name
           break
@@ -67,9 +75,9 @@ local function continue_install(repo_path, tmp)
       end
     end
 
-    if not sofile then
+    if not parser_file then
       local found = vim.fs.find(function(name)
-          return name:match("%.so$")
+          return name:match(parser_pattern)
         end, {
         path = repo_path, type = "file",
         limit = -1,
@@ -81,10 +89,10 @@ local function continue_install(repo_path, tmp)
 
       for _, path in ipairs(found) do
         local base = vim.fs.basename(path)
-        local name = base:gsub("%.so$", "")
+        local name = base:gsub(parser_pattern, "")
 
         if name ~= "parser" and name ~= "scanner" then
-          sofile = path
+          parser_file = path
           filename = base
           lang = name
           break
@@ -92,21 +100,21 @@ local function continue_install(repo_path, tmp)
       end
     end
 
-    if not sofile then
+    if not parser_file then
       local found = vim.fs.find(function(name)
-          return name:match("%.so$")
+          return name:match(parser_pattern)
         end, {
         path = repo_path, type = "file",
         limit = -1,
       })
       if found[1] then
-        sofile = found[1]
-        filename = vim.fs.basename(sofile)
-        lang = filename:gsub("%.so$", "")
+        parser_file = found[1]
+        filename = vim.fs.basename(parser_file)
+        lang = filename:gsub(parser_pattern, "")
       end
     end
 
-    if not sofile then
+    if not parser_file then
       log("error", "No .so file found.")
       vim.fn.delete(tmp, "rf")
       return
@@ -118,7 +126,7 @@ local function continue_install(repo_path, tmp)
     log("step", "[6/8] Installing parser: " .. lang)
 
     vim.fn.delete(parser_dir .. "/" .. filename)
-    vim.uv.fs_copyfile(sofile, parser_dir .. "/" .. filename)
+    vim.uv.fs_copyfile(parser_file, parser_dir .. "/" .. filename)
 
     if vim.fn.isdirectory(repo_path .. "/queries") == 1 then
       vim.fn.delete(query_dir .. "/" .. lang, "rf")
@@ -138,7 +146,8 @@ local function continue_install(repo_path, tmp)
     vim.fn.delete(tmp, "rf")
 
     log("success", "[8/8] Installed parser: " .. lang)
-  end)
+  end,
+  { CC = "gcc" })
 end
 
 function M.install(url)
@@ -177,7 +186,7 @@ function M.install(url)
 end
 
 function M.remove(lang)
-  vim.fn.delete(parser_dir .. "/" .. lang .. ".so")
+  vim.fn.delete(parser_dir .. "/" .. lang .. "." .. dll_ext)
   vim.fn.delete(query_dir .. "/" .. lang, "rf")
 
   log("success", "Removed parser: " .. lang)
@@ -188,7 +197,7 @@ function M.list()
   local langs = {}
 
   for _, file in ipairs(files) do
-    local lang = file:gsub("%.so$", "")
+    local lang = file:gsub(parser_pattern, "")
     table.insert(langs, lang)
   end
 
