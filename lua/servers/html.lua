@@ -21,10 +21,15 @@
 ---   capabilities = capabilities,
 --- })
 --- ```
+local cmd = require("lsp.cmd")
+local capabilities = require("lsp.capabilities").get_capabilities()
+
+-- │ @HTML-LSP_CONFIG │
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'vscode-html-language-server', '--stdio' },
+  cmd = { cmd.get_cmd('html-lsp', 'vscode-html-language-server'), '--stdio' },
+  capabilities = capabilities,
   filetypes = { 'html' },
   root_markers = { 'package.json', '.git' },
   settings = {},

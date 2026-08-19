@@ -1,7 +1,14 @@
 local M = {}
 
-local parser_dir = vim.fn.stdpath("config") .. "/parser"
-local query_dir = vim.fn.stdpath("config") .. "/queries"
+local parser_dir =  vim.fs.joinpath(
+  vim.fn.stdpath("config"),
+  "parser"
+)
+
+local query_dir = vim.fs.joinpath(
+  vim.fn.stdpath("config"),
+  "queries"
+)
 
 local logger = function(level, msg)
   vim.notify(msg)

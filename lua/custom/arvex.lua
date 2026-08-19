@@ -4,7 +4,7 @@ local parser_path = ""
 local languages = {
   "java", "lua", "go", "c", "zig", "typst", "bash",
   "ocaml", "zsh", "latex", "markdown", "markdown_inline",
-  "html", "yaml", "haskell",
+  "html", "yaml", "haskell", "typescript", "javascript"
 }
 
 vim.treesitter.language.register('bash', 'env')

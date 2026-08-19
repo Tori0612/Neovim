@@ -39,7 +39,7 @@ local visual = {
 -- }}}
 
 -- { Weird Settings {{{
-local weird = {
+local behavior = {
   swapfile = false,     backup = false,
   writebackup = false,  backupcopy = "yes",
   undofile = true,
@@ -47,7 +47,7 @@ local weird = {
 
 local undodir = vim.fn.stdpath("state") .. "/undo"
 if vim.fn.isdirectory(undodir) == 0 then
-  vim.fn.mdkir(undodir, "p")
+  vim.fn.mkdir(undodir, "p")
 end
 vim.opt.undodir = undodir
 -- }}}
@@ -95,6 +95,6 @@ vim.api.nvim_create_autocmd("FileType", {
 -- { Applying Options {{{
 apply_options(appearance)
 apply_options(visual)
-apply_options(weird)
+apply_options(behavior)
 apply_options(fold)
 -- }}}

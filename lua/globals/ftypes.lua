@@ -6,6 +6,7 @@ vim.filetype.add({
     hlyrics = "holyrics",
     hll = "xml",
     stlc = "ocaml",
+    osts = "typescript",
   },
   filename = {
     [".env"] = "env",

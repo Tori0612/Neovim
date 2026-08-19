@@ -2,6 +2,7 @@
 setlocal tabstop=2
 setlocal shiftwidth=2
 setlocal expandtab
+setlocal foldmethod=marker
 
 inoremap <buffer> </ </<C-x><C-o><Esc>F<
 

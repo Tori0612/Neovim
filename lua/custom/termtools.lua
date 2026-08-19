@@ -21,6 +21,7 @@ local state = {
   lazydocker = { name = "lazydocker", buf = -1, win = -1, cmd = "lazydocker" },
   tsmanager = { name = "tsmanager", buf = -1, win = -1, cmd = vim.o.shell },
   tetris = { name = 'tetro', buf = -1, win = -1, cmd = 'tetro-tui' },
+  ttyper = { name = 'ttyper', buf = -1, win = -1, cmd = 'ttyper -w 40 -l english1000' },
 }
 
 local ts_items = {
@@ -261,5 +262,6 @@ map.n("<leader>tg", function() toggle_tool(state.lazygit) end, { desc = "Toggle 
 map.n("<leader>td", function() toggle_tool(state.lazydocker) end, { desc = "Toggle Lazydocker" })
 map.n("<leader>tm", function() toggle_tool(state.tsmanager) end, { desc = "Toggle TSManager" })
 map.n("<leader>tt", function() toggle_tool(state.tetris) end, { desc = "Toggle Tetro-TUI" })
+map.n("<leader>ty", function() toggle_tool(state.ttyper) end, { desc = "Toggle ttyper" })
 
 return M

@@ -2,8 +2,16 @@
 local loader = require('utils.loader')
 
 loader.load('plugins', {
-  'luasnip', 'mini', 'oil', 'mason',
-  'blink', 'typst-preview', 'vimtex',
-  'undotree', 'smear_cursor', 'markview', 'fastspell',
-  -- 'copilot', 'jdtls', emmet
+  'luasnip',
+  'mini',
+  'oil',
+  'mason',
+  'blink',
+  -- 'typst-preview', 'vimtex',
+  'undotree',
+  'smear_cursor',
+  'markview', 'fastspell',
+  -- 'copilot',
+  -- 'supermaven',
+  -- 'jdtls', emmet
 })

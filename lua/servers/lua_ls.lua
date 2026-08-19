@@ -92,7 +92,7 @@ return {
     or vim.list_extend(vim.list_extend(root_markers1, root_markers2), { '.git' }),
   on_init = function(client)
     if client.workspace_folders then
-      path = client.workspace_folders[1].name
+      local path = client.workspace_folders[1].name
 
       if path == vim.fn.stdpath('config') then
         local library = { vim.env.VIMRUNTIME }
