@@ -24,6 +24,8 @@
 
 (fenced_code_block_delimiter) @punctuation.delimiter
 
+(inline) @spell
+
 (code_fence_content) @none
 
 (link_destination) @text.uri

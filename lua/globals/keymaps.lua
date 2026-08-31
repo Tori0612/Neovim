@@ -16,6 +16,9 @@ map.n("<leader>q", ":wq<CR>", { desc = "Quick for Save Quiting a File"})
 map.n("<leader>w", ":w<CR>", { desc = "Quick for Saving a File"})
 
 map.n("<leader>lf", vim.lsp.buf.format, { desc = "Trigger Language Format" })
+map.n("<leader>lh", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = 'Toggle Inlay (Language) Hints' })
 map.n("<leader>==", "ggVG=", { desc = "Indent whole file 'correctly'"})
 -- }}}
 

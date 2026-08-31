@@ -7,11 +7,14 @@ loader.load('plugins', {
   'oil',
   'mason',
   'blink',
-  -- 'typst-preview', 'vimtex',
+  -- 'typst-preview',
+  -- 'vimtex',
   'undotree',
   'smear_cursor',
-  'markview', 'fastspell',
+  'markview',
   -- 'copilot',
-  -- 'supermaven',
-  -- 'jdtls', emmet
+  'supermaven',
+  -- 'jdtls',
+  'emmet',
+  -- 'ninety_nine'
 })

@@ -29,6 +29,9 @@
   (hard_line_break)
 ] @string.escape
 
+(inline) @spell
+(text_inline) @spell
+
 (image
   [
     "!"

@@ -96,39 +96,8 @@ return {
 
       if path == vim.fn.stdpath('config') then
         local library = { vim.env.VIMRUNTIME }
-        local pack_path = vim.fn.stdpath('data') .. '/site/pack'
 
-        local function scan_plugin_dir(dir)
-          local handle = vim.uv.fs_scandir(dir)
-          if handle then
-            while true do
-              local name, type = vim.uv.fs_scandir_next(handle)
-              if not name then break end
-
-              if type == "directory" then
-                local lua_dir = dir .. '/' .. name .. '/lua'
-                if vim.uv.fs_stat(lua_dir) then
-                  table.insert(library, lua_dir)
-                end
-              end
-            end
-          end
-        end
-
-        local pack_handle = vim.uv.fs_scandir(pack_path)
-        if pack_handle then
-          while true do
-            local pkg_name, pkg_type = vim.uv.fs_scandir_next(pack_handle)
-            if not pkg_name then break end
-
-            if pkg_type == "directory" then
-              scan_plugin_dir(pack_path .. "/" .. pkg_name .. "/start")
-              scan_plugin_dir(pack_path .. "/" .. pkg_name .. "/opt")
-            end
-          end
-        end
         ---@cast client.config.settings.Lua table
-
         client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua or {}, {
           workspace = {
             checkThirdParty = false,
@@ -138,6 +107,9 @@ return {
         client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
       end
     end
+  end,
+  on_attach = function (client, bufnr)
+    client.server_capabilities.semanticTokensProvider = nil
   end,
   settings = {
     Lua = {

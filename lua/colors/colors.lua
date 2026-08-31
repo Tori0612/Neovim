@@ -1,48 +1,48 @@
--- Kanagawa color palette
--- theme: kanagawa-dragon
+-- Rosé Pine color palette
+-- theme: rose-pine
 return {
   -- Background shades (darkest to lightest)
-  bg0 = "#16161D",  -- sumiInk0
-  bg1 = "#1F1F28",  -- sumiInk1
-  bg2 = "#2A2A37",  -- sumiInk2
-  bg3 = "#363646",  -- sumiInk3
-  bg4 = "#54546D",  -- sumiInk4
+  bg0 = "#191724",  -- base
+  bg1 = "#1f1d2e",  -- surface
+  bg2 = "#26233a",  -- overlay
+  bg3 = "#403d52",  -- highlightMed
+  bg4 = "#524f67",  -- highlightHigh
 
   -- Foreground shades (dimmest to brightest)
-  fg0 = "#727169",
-  fg1 = "#C8C093",  -- oldWhite
-  fg2 = "#DCD7BA",  -- fujiWhite
-  fg3 = "#DCD7BA",
+  fg0 = "#6e6a86",  -- muted
+  fg1 = "#908caa",  -- subtle
+  fg2 = "#e0def4",  -- text
+  fg3 = "#e0def4",
 
   -- Core accent colors
-  red = "#E82424",      -- winterRed
-  orange = "#FF9E3B",   -- roninYellow
-  yellow = "#DCA561",   -- autumnYellow
-  green = "#98BB6C",    -- autumnGreen
-  cyan = "#7FB4CA",     -- crystalBlue
-  blue = "#7E9CD8",     -- springBlue
-  purple = "#957FB8",   -- oniViolet
-  magenta = "#938AA9",  -- springViolet1
+  red = "#eb6f92",    -- love
+  orange = "#ea9a97",
+  yellow = "#f6c177",  -- gold
+  green = "#9ccfd8",   -- foam (closest to green)
+  cyan = "#9ccfd8",    -- foam
+  blue = "#31748f",    -- pine
+  purple = "#c4a7e7",  -- iris
+  magenta = "#ebbcba", -- rose
 
-  -- Bright variants
-  bright_red = "#C34043",    -- autumnRed
-  bright_orange = "#FF9E3B",
-  bright_yellow = "#DCA561",
-  bright_green = "#76946A",  -- winterGreen
-  bright_cyan = "#7AA89F",   -- waveAqua2
-  bright_blue = "#9CABCA",   -- springViolet2
-  bright_purple = "#957FB8",
-  bright_magenta = "#D27E99",
+  -- Bright variants (using same, as theme doesn't have explicit brights)
+  bright_red = "#eb6f92",
+  bright_orange = "#ea9a97",
+  bright_yellow = "#f6c177",
+  bright_green = "#9ccfd8",
+  bright_cyan = "#9ccfd8",
+  bright_blue = "#31748f",
+  bright_purple = "#c4a7e7",
+  bright_magenta = "#ebbcba",
 
   -- Semantic UI colors
-  normal  = "#7E9CD8",  -- springBlue
-  insert  = "#98BB6C",  -- autumnGreen
-  visual  = "#957FB8",  -- oniViolet
-  replace = "#C34043",  -- autumnRed (better than winterRed)
-  command = "#FF9E3B",  -- roninYellow (acts as orange)
+  normal  = "#31748f",  -- pine (main identity)
+  insert  = "#9ccfd8",  -- foam (closest to green)
+  visual  = "#c4a7e7",  -- iris
+  replace = "#eb6f92",  -- love (clear warning tone)
+  command = "#f6c177",  -- gold
 
   -- Special
-  comment = "#54546D",
-  selection = "#2D4F67",  -- waveBlue2
-  border = "#957FB8",
+  comment = "#6e6a86",
+  selection = "#403d52",
+  border = "#31748f",
 }

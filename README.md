@@ -1,1 +1,1 @@
-just _another_ neovim config
+just _another_ neovim config Configs

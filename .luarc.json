@@ -1,10 +1,11 @@
 {
   "runtime.version": "LuaJIT",
-  "workspace.checkThirdParty": false,
-  "workspace.library": [
-    "$VIMRUNTIME/lua",
-    "${3rd}/luv/library",
-    "~/.local/share/nvim/site/pack/plugins/start"
-  ],
+  "workspace": {
+    "library": [
+      "$VIMRUNTIME/lua",
+      "${3rd}/luv/library"
+    ],
+    "checkThirdParty": false
+  },
   "diagnostics.unusedLocalExclude": ["_"]
 }

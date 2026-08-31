@@ -2,9 +2,10 @@
 local is_windows = vim.fn.has("win32") == 1
 local parser_path = ""
 local languages = {
-  "java", "lua", "go", "c", "zig", "typst", "bash",
-  "ocaml", "zsh", "latex", "markdown", "markdown_inline",
-  "html", "yaml", "haskell", "typescript", "javascript"
+  "lua", "go", "c", "zig", "typst", "bash",
+  "zsh", "latex", "markdown", "markdown_inline",
+  "html", "typescript", "javascript", "python",
+  -- "ocaml", "java", "yaml", "haskell"
 }
 
 vim.treesitter.language.register('bash', 'env')

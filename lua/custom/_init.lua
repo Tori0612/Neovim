@@ -12,7 +12,8 @@ loader.load('custom', {
   'jumper',             -- inspiration: @l https://github.com/ThePrimeagen/harpoon
   'statusline',         -- inspiration: @l https://github.com/nvim-lualine/lualine.nvim
   'termtools',          -- inspiration: @l https://github.com/akinsho/toggleterm.nvim
-  'arvex', 'theme_switcher', 'highlights', 'toc',
+  'spelling',
+  'arvex', 'theme_switcher', 'highlights', 'toc', 'manim'
   -- 'treesitter_manager'
 })
 

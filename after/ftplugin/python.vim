@@ -3,8 +3,6 @@ setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal softtabstop=4
 setlocal expandtab
-setlocal textwidth=88
-setlocal colorcolumn=89
 
 setlocal makeprg=python3\ %
 setlocal errorformat=%ETraceback%.%#,%Z%f:%l:\ %m
@@ -17,6 +15,9 @@ autocmd BufWritePre <buffer> silent! lua if vim.lsp.get_clients({bufnr=0})[1] th
 noremap <buffer> <leader>rr :call termutils#Run("python3 %")<CR>
 noremap <buffer> <leader>rt :call termutils#Run("python3 -m pytest %")<CR>
 noremap <buffer> <leader>ri :call termutils#Run("python3 -i %")<CR>
+noremap <buffer> <leader>rm :Manim<CR>
+noremap <buffer> <leader>rw :ManimWatch<CR>
+noremap <buffer> <leader>rs :ManimStop<CR>
 
 setlocal foldmethod=indent
 setlocal foldnestmax=2

@@ -65,12 +65,17 @@
 ---
 --- It is recommended to use the same version of TypeScript in all packages, and therefore have it available in your workspace root. The location of the TypeScript binary will be determined automatically, but only once.
 
+local cmd = require("lsp.cmd")
+local capabilities = require("lsp.capabilities").get_capabilities()
+
+-- │ @VTSLS_CONFIG │
 ---@type vim.lsp.Config
 return {
-  cmd = { 'vtsls', '--stdio' },
+  cmd = { cmd.get_cmd("vtsls", 'vtsls'), '--stdio' },
   init_options = {
     hostInfo = 'neovim',
   },
+  capabilities = capabilities,
   filetypes = {
     'javascript',
     'javascriptreact',
@@ -98,5 +103,8 @@ return {
     local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
 
     on_dir(project_root)
+  end,
+  on_attach = function (client, bufnr)
+    client.server_capabilities.semanticTokensProvider = nil
   end,
 }

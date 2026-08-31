@@ -1,4 +1,4 @@
--- @p lua/custom/surr.lua
+-- @p lua/custom/surround.lua
 
 local map = require('utils.map')
 

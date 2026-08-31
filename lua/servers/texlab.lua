@@ -149,7 +149,7 @@ return {
         args = {},
       },
       chktex = {
-        onOpenAndSave = false,
+        onOpenAndSave = true,
         onEdit = false,
       },
       diagnosticsDelay = 300,

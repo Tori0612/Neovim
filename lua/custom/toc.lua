@@ -16,11 +16,19 @@ local function collect_toc()
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
   local items = {}
 
-  local patterns = {
-      "%-%-%s*{(.-){{{",      -- -- { Title {{{
-      "%-%-%s*@t%s*%[(.-)%]", -- -- @t [ Title ]
+  local ft = vim.bo.filetype
 
+  local ft_patterns = {
+      markdown = {
+        "^(#+%s+.*)",
+      },
+      default = {
+        "%-%-%s*{(.-){{{",      -- -- { Title {{{
+        "%-%-%s*@t%s*%[(.-)%]", -- -- @t [ Title ]
+      },
   }
+
+  local patterns = ft_patterns[ft] or ft_patterns.default
   for i, line in ipairs(lines) do
     for _, pat in ipairs(patterns) do
       local section = line:match(pat)

@@ -1,12 +1,18 @@
 -- @p lua/plugins/supermaven.lua
 local gh = require('utils.github').gh
 
-local supermaven_is_on = false
+local initialized = false
 
-local function start_supermaven()
+local function ensure_supermaven()
+  if initialized then
+    return require("supermaven-nvim.api")
+  end
+
   vim.pack.add({ { src = gh("supermaven-inc/supermaven-nvim") } })
+
   require('supermaven-nvim').setup({
     keymaps = {
+      accept_suggestion = '<C-y>',
       clear_suggestion = '<C-h>',
       accept_word = '<C-j>',
     },
@@ -15,33 +21,26 @@ local function start_supermaven()
       help = true,
     },
   })
-  supermaven_is_on = true
-end
 
-vim.api.nvim_create_user_command("SupermavenToggle", function()
-  local loaded = package.loaded["supermaven-nvim"]
-
-  if not loaded then
-    start_supermaven()
-    vim.notify("Supermaven: Initialized and Enabled", vim.log.levels.INFO)
-    return
-  end
+  initialized = true
 
   local api = require("supermaven-nvim.api")
-  local preview = require("supermaven-nvim.completion_preview")
+  api.stop()
 
-  if supermaven_is_on then
-    api.stop()
-    if preview.has_suggestion() then
-      preview.on_clear_suggestion()
-    end
-    supermaven_is_on = false
-    vim.notify("Supermaven Disabled", vim.log.levels.WARN)
+  return api
+end
+
+
+vim.api.nvim_create_user_command("SupermavenTog", function()
+  local api = ensure_supermaven()
+
+  api.toggle()
+
+  if api.is_running() then
+    vim.notify("Supermaven: Enabled", vim.log.levels.INFO)
   else
-    api.start()
-    supermaven_is_on = true
-    vim.notify("Supermaven Enabled", vim.log.levels.INFO)
+    vim.notify("Supermaven: Disabled", vim.log.levels.WARN)
   end
-end, { desc = "Toggle Supermaven" })
+end, {})
 
-vim.keymap.set('n', '<leader>ct', '<cmd>SupermavenToggle<CR>', { desc = "Toggle Supermaven" })
+vim.keymap.set('n', '<leader>ct', '<cmd>SupermavenTog<CR>', { desc = "Toggle Supermaven" })

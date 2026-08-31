@@ -12,6 +12,7 @@ require("blink.cmp").setup({
     -- C-k: Toggle signature help (if signature.enabled = true)
     keymap = {
       preset = 'default',
+      ['<C-y>'] = false,
       ['ç'] = { 'accept', 'fallback' },
     },
     appearance = {
